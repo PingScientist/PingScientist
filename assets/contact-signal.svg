@@ -9,6 +9,7 @@
     .frame { fill: #07111f; stroke: #18374a; }
     .label { fill: #f4f7f8; }
     .meta { fill: #91a9b8; }
+    .divider { stroke: #102a3a; }
     .track {
       fill: none;
       stroke: #18374a;
@@ -25,16 +26,36 @@
     .signal-right { stroke: #c7a85a; }
     .motion-layer { display: inline; }
     .static-layer { display: none; }
+
+    @media (prefers-color-scheme: dark) {
+      .frame { fill: #07111f; stroke: #18374a; }
+      .label { fill: #f4f7f8; }
+      .meta { fill: #91a9b8; }
+      .divider { stroke: #102a3a; }
+      .track { stroke: #18374a; }
+      .signal-left { stroke: #42d6c5; }
+      .signal-right { stroke: #c7a85a; }
+    }
+
     @media (prefers-color-scheme: light) {
-      .frame { stroke: #2d6377; }
-      .meta { fill: #b7c8d1; }
-      .track { stroke: #245268; }
+      .frame { fill: #edf2f3; stroke: #b8cbd2; }
+      .label { fill: #152b37; }
+      .meta { fill: #526d79; }
+      .divider { stroke: #cfdbdf; }
+      .track { stroke: #abc0c8; }
+      .signal-left { stroke: #087f79; }
+      .signal-right { stroke: #8a6a20; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .motion-layer { display: none; }
+      .static-layer { display: inline; }
     }
   </style>
 
   <rect class="frame" x="1" y="1" width="1198" height="102" rx="5" />
-  <line x1="28" y1="18" x2="1172" y2="18" stroke="#102a3a" />
-  <line x1="28" y1="86" x2="1172" y2="86" stroke="#102a3a" />
+  <line class="divider" x1="28" y1="18" x2="1172" y2="18" />
+  <line class="divider" x1="28" y1="86" x2="1172" y2="86" />
 
   <path class="track" d="M252 52 C310 42 354 62 406 52 S462 44 492 52" />
   <path class="track" d="M948 52 C890 62 846 42 794 52 S738 60 708 52" />

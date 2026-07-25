@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/profile-header.svg?v=20260726" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web" />
+  <img src="./assets/profile-header.svg?v=20260726b" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web" />
 </p>
 
 <p align="center">
@@ -113,9 +113,9 @@ The simulations compare three boundary protocols:
 
 <div align="center">
 
-  <img src="./assets/contact-signal.svg?v=20260726" width="100%" alt="Contact signal connecting GitHub, PingScientist, and email" />
+  <img src="./assets/contact-signal.svg?v=20260726b" width="100%" alt="Contact signal connecting GitHub, PingScientist, and email" />
 
-  <p align="center"><a href="https://github.com/PingScientist"><img src="./assets/contact-github.svg" height="36" alt="Visit PingScientist on GitHub"></a>&nbsp;&nbsp;<a href="mailto:clpinkhgm@gmail.com"><img src="./assets/contact-email.svg" height="36" alt="Send an email to PingScientist"></a></p>
+  <a href="https://github.com/PingScientist"><img src="./assets/contact-github.svg?v=20260726a" width="134" alt="Visit PingScientist on GitHub"></a>&nbsp;<a href="mailto:clpinkhgm@gmail.com"><img src="./assets/contact-email.svg?v=20260726a" width="134" alt="Send an email to PingScientist"></a>
 
 </div>
 
