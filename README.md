@@ -97,7 +97,6 @@ The simulations compare three boundary protocols:
 `MATLAB` · `Numerical Methods` · `Scientific Visualization`
 
 <!-- Replace the placeholder below after publishing the MATLAB repository. -->
-[Repository →](YOUR_MATLAB_REPOSITORY_URL)
 
 ---
 
