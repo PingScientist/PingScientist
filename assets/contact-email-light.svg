@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-labelledby="title desc">
+  <title id="title">Email</title>
+  <desc id="desc">A compact flat button for sending an email to PingScientist.</desc>
+
+  <style>
+    text {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .background { fill: #edf2f3; stroke: #c1ad72; }
+    .label { fill: #152b37; }
+    .accent { fill: none; stroke: #8a6a20; }
+
+  </style>
+
+  <rect class="background" x="1" y="1" width="218" height="54" rx="5" />
+  <line class="accent" x1="18" y1="15" x2="18" y2="41" stroke-width="3" />
+  <path class="accent" d="M31 22 H45 V34 H31 Z M32 23 L38 29 L44 23" stroke-width="1.8" stroke-linejoin="round" />
+  <text class="label" x="54" y="34" font-size="15" font-weight="700" letter-spacing="1.5">EMAIL</text>
+  <path class="accent" d="M194 23 L200 28 L194 33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

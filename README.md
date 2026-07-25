@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="./assets/profile-header.svg?v=20260726b" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-header-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-header-light.svg">
+    <img src="./assets/profile-header-dark.svg" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web">
+  </picture>
 </p>
 
 <p align="center">
@@ -113,9 +117,13 @@ The simulations compare three boundary protocols:
 
 <div align="center">
 
-  <img src="./assets/contact-signal.svg?v=20260726b" width="100%" alt="Contact signal connecting GitHub, PingScientist, and email" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/contact-signal-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/contact-signal-light.svg">
+    <img src="./assets/contact-signal-dark.svg" width="100%" alt="Contact signal connecting GitHub, PingScientist, and email">
+  </picture>
 
-  <a href="https://github.com/PingScientist"><img src="./assets/contact-github.svg?v=20260726a" width="134" alt="Visit PingScientist on GitHub"></a>&nbsp;<a href="mailto:clpinkhgm@gmail.com"><img src="./assets/contact-email.svg?v=20260726a" width="134" alt="Send an email to PingScientist"></a>
+  <p align="center"><a href="https://github.com/PingScientist"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/contact-github-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/contact-github-light.svg"><img src="./assets/contact-github-dark.svg" width="128" alt="Visit PingScientist on GitHub"></picture></a>&nbsp;<a href="mailto:clpinkhgm@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/contact-email-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/contact-email-light.svg"><img src="./assets/contact-email-dark.svg" width="128" alt="Send an email to PingScientist"></picture></a></p>
 
 </div>
 

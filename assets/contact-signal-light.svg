@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 104" role="img" aria-labelledby="title desc">
+  <title id="title">Contact signal</title>
+  <desc id="desc">Two animated signals travel inward from GitHub and email toward PingScientist.</desc>
+
+  <style>
+    text {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .frame { fill: #edf2f3; stroke: #b8cbd2; }
+    .label { fill: #152b37; }
+    .meta { fill: #526d79; }
+    .divider { stroke: #cfdbdf; }
+    .track {
+      fill: none;
+      stroke: #abc0c8;
+      stroke-width: 1.4;
+    }
+    .signal-left,
+    .signal-right {
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-dasharray: 10 14;
+    }
+    .signal-left { stroke: #087f79; }
+    .signal-right { stroke: #8a6a20; }
+    .motion-layer { display: inline; }
+
+  </style>
+
+  <rect class="frame" x="1" y="1" width="1198" height="102" rx="5" />
+  <line class="divider" x1="28" y1="18" x2="1172" y2="18" />
+  <line class="divider" x1="28" y1="86" x2="1172" y2="86" />
+
+  <path class="track" d="M252 52 C310 42 354 62 406 52 S462 44 492 52" />
+  <path class="track" d="M948 52 C890 62 846 42 794 52 S738 60 708 52" />
+
+  <!-- Animated paths are drawn from each outside node toward the center. -->
+  <g class="motion-layer">
+    <path class="signal-left" d="M252 52 C310 42 354 62 406 52 S462 44 492 52">
+      <animate attributeName="stroke-dashoffset" values="0;-96" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="d"
+        values="M252 52 C310 42 354 62 406 52 S462 44 492 52;
+                M252 52 C310 62 354 42 406 52 S462 60 492 52;
+                M252 52 C310 42 354 62 406 52 S462 44 492 52"
+        dur="7s" repeatCount="indefinite" />
+    </path>
+    <path class="signal-right" d="M948 52 C890 62 846 42 794 52 S738 60 708 52">
+      <animate attributeName="stroke-dashoffset" values="0;-96" dur="5.4s" repeatCount="indefinite" />
+      <animate attributeName="d"
+        values="M948 52 C890 62 846 42 794 52 S738 60 708 52;
+                M948 52 C890 42 846 62 794 52 S738 44 708 52;
+                M948 52 C890 62 846 42 794 52 S738 60 708 52"
+        dur="7.5s" repeatCount="indefinite" />
+    </path>
+
+    <circle cx="252" cy="52" r="4" fill="#087f79">
+      <animate attributeName="opacity" values="0.65;1;0.65" dur="3.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="492" cy="52" r="4" fill="#087f79">
+      <animate attributeName="opacity" values="0.45;1;0.45" dur="3s" begin="-1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="708" cy="52" r="4" fill="#8a6a20">
+      <animate attributeName="opacity" values="0.45;1;0.45" dur="3s" begin="-1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="948" cy="52" r="4" fill="#8a6a20">
+      <animate attributeName="opacity" values="0.65;1;0.65" dur="3.6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <text class="label" x="56" y="49" font-size="16" font-weight="700" letter-spacing="1.8">GITHUB</text>
+  <text class="meta" x="56" y="68" font-size="10" letter-spacing="1.5">SOURCE</text>
+
+  <text class="label" x="516" y="49" font-size="17" font-weight="700" letter-spacing="1.9">PINGSCIENTIST</text>
+  <text class="meta" x="516" y="68" font-size="10" letter-spacing="1.5">SIGNAL / OPEN</text>
+
+  <text class="label" x="974" y="49" font-size="16" font-weight="700" letter-spacing="1.8">EMAIL</text>
+  <text class="meta" x="974" y="68" font-size="10" letter-spacing="1.5">CONNECT</text>
+</svg>

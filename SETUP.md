@@ -12,4 +12,4 @@ Then replace this placeholder in `README.md`:
 YOUR_MATLAB_REPOSITORY_URL
 ```
 
-The header animation is implemented entirely in `assets/profile-header.svg` with SVG code. It does not depend on JavaScript, an external statistics service, or a raster banner image.
+The header animation is implemented entirely in `assets/profile-header-dark.svg` and `assets/profile-header-light.svg` with SVG code. It does not depend on JavaScript, an external statistics service, or a raster banner image.
