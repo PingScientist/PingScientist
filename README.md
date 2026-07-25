@@ -76,10 +76,10 @@ A full-stack archive platform for students in the Department of Physics at Natio
 <table>
   <tr>
     <td width="50%">
-      <img src="./assets/projects/moving-ball-fe.png" width="100%" alt="Probability density in an expanding spherical well" />
+      <img src="./assets/projects/sudden_ball_fe_state_animation.gif" width="100%" alt="Animated probability density of the spherical-well first excited state after sudden expansion" />
     </td>
     <td width="50%">
-      <img src="./assets/projects/moving-cube-fe.png" width="100%" alt="Probability density in an expanding cubic well" />
+      <img src="./assets/projects/sudden_cube_fe_state_animation.gif" width="100%" alt="Animated probability density of the cubic-well first excited state after sudden expansion" />
     </td>
   </tr>
 </table>
