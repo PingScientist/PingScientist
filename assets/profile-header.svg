@@ -1,54 +1,80 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
   <title id="title">PING SCIENTIST</title>
-  <desc id="desc">A restrained scientific header with a continuous wave, sparse coordinate grid, wireframe sphere, and cube.</desc>
+  <desc id="desc">A restrained scientific header with slowly interacting particles in a warped coordinate field.</desc>
 
   <style>
     text {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .grid { fill: none; stroke: #153246; stroke-width: 1; }
-    .geometry { fill: none; stroke: #2d6377; stroke-width: 1.5; }
-    .wave {
+    .grid-primary,
+    .grid-secondary {
       fill: none;
-      stroke: #42d6c5;
-      stroke-width: 2.6;
-      stroke-linecap: round;
-      animation: wave-breathe 6s ease-in-out infinite;
+      stroke: #153246;
+      stroke-width: 1.1;
       transform-box: fill-box;
       transform-origin: center;
     }
-    .orbit {
-      fill: none;
-      stroke: #c7a85a;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-dasharray: 8 13;
-      animation: orbit-flow 7s linear infinite;
+    .grid-primary { animation: grid-drift 12s ease-in-out infinite; }
+    .grid-secondary { animation: grid-shift 15s ease-in-out infinite; }
+    .particle {
+      transform-box: fill-box;
+      transform-origin: center;
     }
-    .marker { animation: marker-pulse 3s ease-in-out infinite; }
+    .drift-a { animation: drift-a 9s ease-in-out infinite; }
+    .drift-b { animation: drift-b 11s ease-in-out infinite; }
+    .drift-c { animation: drift-c 13s ease-in-out infinite; }
+    .drift-d { animation: drift-d 10s ease-in-out infinite; }
+    .drift-e { animation: drift-e 12s ease-in-out infinite; }
+    .delay-1 { animation-delay: -2.5s; }
+    .delay-2 { animation-delay: -5s; }
+    .delay-3 { animation-delay: -7.5s; }
     .cursor { animation: cursor-blink 1.1s steps(2, end) infinite; }
-    @keyframes wave-breathe {
-      0%, 100% { transform: translateY(0); opacity: 0.82; }
-      50% { transform: translateY(-4px); opacity: 1; }
+    @keyframes grid-drift {
+      0%, 100% { transform: translate(0, 0) scale(1, 1); opacity: 0.64; }
+      50% { transform: translate(-6px, 3px) scale(1.012, 0.985); opacity: 0.82; }
     }
-    @keyframes orbit-flow {
-      to { stroke-dashoffset: -84; }
+    @keyframes grid-shift {
+      0%, 100% { transform: translate(0, 0) skewX(0deg); opacity: 0.54; }
+      50% { transform: translate(5px, -2px) skewX(-1.2deg); opacity: 0.72; }
     }
-    @keyframes marker-pulse {
-      0%, 100% { opacity: 0.45; }
-      50% { opacity: 1; }
+    @keyframes drift-a {
+      0%, 100% { transform: translate(0, 0); }
+      34% { transform: translate(18px, -9px); }
+      68% { transform: translate(7px, 13px); }
+    }
+    @keyframes drift-b {
+      0%, 100% { transform: translate(0, 0); }
+      38% { transform: translate(-16px, 11px); }
+      72% { transform: translate(9px, -12px); }
+    }
+    @keyframes drift-c {
+      0%, 100% { transform: translate(0, 0); }
+      30% { transform: translate(12px, 14px); }
+      66% { transform: translate(-13px, 5px); }
+    }
+    @keyframes drift-d {
+      0%, 100% { transform: translate(0, 0); }
+      36% { transform: translate(-10px, -15px); }
+      70% { transform: translate(15px, 6px); }
+    }
+    @keyframes drift-e {
+      0%, 100% { transform: translate(0, 0); }
+      32% { transform: translate(9px, -12px); }
+      64% { transform: translate(-15px, 10px); }
     }
     @keyframes cursor-blink {
       50% { opacity: 0; }
     }
     @media (prefers-color-scheme: light) {
-      .grid { stroke: #1d4359; }
-      .geometry { stroke: #34758b; }
+      .grid-primary,
+      .grid-secondary {
+        stroke: #1d4359;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
-      .wave,
-      .orbit,
-      .marker,
+      .grid-primary,
+      .grid-secondary,
+      .particle,
       .cursor {
         animation: none;
       }
@@ -60,33 +86,34 @@
   <text x="48" y="37" fill="#6f8b9b" font-size="12" letter-spacing="2.2">PROFILE / 00</text>
   <line x1="28" y1="55" x2="1172" y2="55" stroke="#18374a" />
 
-  <!-- Sparse coordinate field -->
-  <g opacity="0.72">
-    <path class="grid" d="M560 92 H1168 M560 150 H1168 M560 208 H1168 M620 70 V276 M790 70 V276 M960 70 V276 M1130 70 V276" />
-    <path d="M560 266 H1168" stroke="#102a3a" />
+  <!-- Slowly deforming coordinate field -->
+  <g class="grid-primary">
+    <path d="M560 88 C684 67 782 114 900 92 S1072 70 1170 88" />
+    <path d="M540 134 C676 110 790 163 924 136 S1080 114 1180 134" />
+    <path d="M540 184 C680 154 792 216 932 184 S1092 160 1180 180" />
+    <path d="M560 236 C690 204 812 263 950 232 S1092 213 1180 226" />
+  </g>
+  <g class="grid-secondary">
+    <path d="M620 68 C590 126 650 184 618 270" />
+    <path d="M750 65 C720 125 780 185 748 276" />
+    <path d="M880 65 C850 125 910 188 878 276" />
+    <path d="M1010 65 C980 126 1040 190 1008 270" />
+    <path d="M1140 70 C1110 130 1160 188 1136 260" />
   </g>
 
-  <!-- Minimal wireframe geometry -->
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <circle class="geometry" cx="850" cy="151" r="67" />
-    <ellipse class="geometry" cx="850" cy="151" rx="67" ry="24" />
-    <ellipse class="geometry" cx="850" cy="151" rx="24" ry="67" />
-    <path d="M789 127 Q850 91 911 127" stroke="#42d6c5" stroke-width="2" />
-
-    <path class="geometry" d="M1020 119 L1080 91 L1140 119 L1080 148 Z
-                              M1020 119 V190 L1080 221 L1140 190 V119
-                              M1080 148 V221" />
+  <!-- Sparse particles drifting through the field -->
+  <g>
+    <circle class="particle drift-a" cx="636" cy="111" r="4" fill="#42d6c5" />
+    <circle class="particle drift-b delay-1" cx="714" cy="196" r="3" fill="#f4f7f8" opacity="0.88" />
+    <circle class="particle drift-c delay-2" cx="778" cy="123" r="4.5" fill="#c7a85a" />
+    <circle class="particle drift-d delay-3" cx="842" cy="215" r="3.5" fill="#42d6c5" />
+    <circle class="particle drift-e delay-1" cx="902" cy="98" r="3" fill="#f4f7f8" opacity="0.78" />
+    <circle class="particle drift-a delay-2" cx="958" cy="171" r="4" fill="#42d6c5" />
+    <circle class="particle drift-b delay-3" cx="1014" cy="226" r="3" fill="#c7a85a" />
+    <circle class="particle drift-c delay-1" cx="1062" cy="120" r="3.5" fill="#f4f7f8" opacity="0.84" />
+    <circle class="particle drift-d delay-2" cx="1110" cy="188" r="4" fill="#c7a85a" />
+    <circle class="particle drift-e delay-3" cx="1160" cy="92" r="2.8" fill="#42d6c5" />
   </g>
-
-  <!-- One supporting trajectory -->
-  <path class="orbit" d="M670 225 C744 85 954 57 1148 111" opacity="0.82" />
-  <circle class="marker" cx="754" cy="123" r="4" fill="#c7a85a" />
-
-  <!-- One continuous wave path -->
-  <path class="wave" d="M520 229
-                         C582 190 638 264 704 226
-                         C770 188 828 258 895 222
-                         C963 185 1037 253 1168 211" />
 
   <!-- Title block -->
   <g>
