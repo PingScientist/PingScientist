@@ -73,20 +73,13 @@
     <animate attributeName="stroke-dashoffset" from="0" to="-96" dur="4.5s" repeatCount="indefinite" />
   </path>
 
-  <circle r="4" fill="#c7a85a">
-    <animateMotion dur="7.5s" repeatCount="indefinite" rotate="auto">
-      <mpath href="#trajectory" />
-    </animateMotion>
-  </circle>
-  <circle r="3" fill="#42d6c5">
-    <animateMotion dur="9.5s" begin="-3s" repeatCount="indefinite" rotate="auto"
-      path="M550 118 C690 82 805 118 914 86 S1080 66 1170 94" />
-  </circle>
+  <circle cx="770" cy="145" r="4" fill="#c7a85a" />
+  <circle cx="1044" cy="87" r="3" fill="#42d6c5" />
 
   <!-- Title block -->
   <g>
-    <text x="72" y="142" fill="#eef8f5" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
-    <text x="72" y="199" fill="#42d6c5" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
+    <text x="72" y="142" fill="#f4f7f8" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
+    <text x="72" y="199" fill="#f4f7f8" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
     <line x1="74" y1="222" x2="446" y2="222" stroke="#c7a85a" stroke-width="2" />
     <rect x="453" y="217" width="10" height="10" fill="#c7a85a" transform="rotate(45 458 222)" />
     <text x="72" y="258" fill="#9cb0bb" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>

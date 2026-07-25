@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 88" role="img" aria-labelledby="title desc">
+  <title id="title">Email PingScientist</title>
+  <desc id="desc">A local flat button for sending an email to PingScientist.</desc>
+
+  <style>
+    text {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .background { fill: #07111f; stroke: #c7a85a; }
+    .primary { fill: #f4f7f8; }
+    .secondary { fill: #91a9b8; }
+    @media (prefers-color-scheme: light) {
+      .background { stroke: #a68437; }
+      .secondary { fill: #b7c8d1; }
+    }
+  </style>
+
+  <rect class="background" x="1" y="1" width="358" height="86" rx="8" />
+  <g fill="none" stroke="#c7a85a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="27" y="31" width="36" height="27" rx="3" />
+    <path d="M29 34 L45 47 L61 34" />
+  </g>
+  <line x1="78" y1="18" x2="78" y2="70" stroke="#18374a" />
+  <text class="primary" x="100" y="40" font-size="18" font-weight="700" letter-spacing="1.8">EMAIL</text>
+  <text class="secondary" x="100" y="62" font-size="13" letter-spacing="0.8">clpinkhgm@gmail.com</text>
+  <path d="M321 38 L329 44 L321 50" fill="none" stroke="#c7a85a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
