@@ -115,29 +115,21 @@ The simulations compare three boundary protocols:
 
   <img src="./assets/contact-signal.svg" width="100%" alt="Contact signal connecting GitHub, PingScientist, and email" />
 
-  <br>
-
-  <p><strong>Let’s connect.</strong></p>
-
   <p>
+    <strong>Let’s connect.</strong><br>
     Physics, scientific computing, web development,<br>
     and projects at the intersection of them.
   </p>
 
   <p>
-    <a href="https://github.com/PingScientist"><img src="./assets/contact-github.svg" height="44" alt="Visit PingScientist on GitHub"></a>
+    <a href="https://github.com/PingScientist"><img src="./assets/contact-github.svg" height="36" alt="Visit PingScientist on GitHub"></a>
     &nbsp;
-    <a href="mailto:clpinkhgm@gmail.com"><img src="./assets/contact-email.svg" height="44" alt="Send an email to PingScientist"></a>
+    <a href="mailto:clpinkhgm@gmail.com"><img src="./assets/contact-email.svg" height="36" alt="Send an email to PingScientist"></a>
   </p>
 
-  <sub>
-    Open to conversations about physics, simulation,<br>
-    interface design, and open-source projects.
-  </sub>
+  <sub>Open to conversations about physics, simulation, interface design, and open-source projects.</sub>
 
 </div>
-
-<br>
 
 ---
 

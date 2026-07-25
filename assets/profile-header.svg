@@ -1,21 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
   <title id="title">PING SCIENTIST</title>
-  <desc id="desc">Flat animated header with curved coordinate grids, a wavefunction line, and particle trajectories.</desc>
+  <desc id="desc">A restrained scientific header with a continuous wave, sparse coordinate grid, wireframe sphere, and cube.</desc>
 
   <style>
     text {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .grid-line { fill: none; stroke: #18374a; stroke-width: 1.2; }
-    .grid-faint { fill: none; stroke: #102a3a; stroke-width: 1; }
-    .cyan { stroke: #42d6c5; }
-    .gold { stroke: #c7a85a; }
-    .dash-flow { stroke-dasharray: 10 14; }
-    .wave-flow { stroke-dasharray: 18 10; }
-    .cursor { animation: cursor-blink 1.05s steps(2, end) infinite; }
-    @keyframes cursor-blink { 50% { opacity: 0; } }
+    .grid { fill: none; stroke: #153246; stroke-width: 1; }
+    .geometry { fill: none; stroke: #2d6377; stroke-width: 1.5; }
+    .wave {
+      fill: none;
+      stroke: #42d6c5;
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      animation: wave-breathe 6s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .orbit {
+      fill: none;
+      stroke: #c7a85a;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-dasharray: 8 13;
+      animation: orbit-flow 7s linear infinite;
+    }
+    .marker { animation: marker-pulse 3s ease-in-out infinite; }
+    .cursor { animation: cursor-blink 1.1s steps(2, end) infinite; }
+    @keyframes wave-breathe {
+      0%, 100% { transform: translateY(0); opacity: 0.82; }
+      50% { transform: translateY(-4px); opacity: 1; }
+    }
+    @keyframes orbit-flow {
+      to { stroke-dashoffset: -84; }
+    }
+    @keyframes marker-pulse {
+      0%, 100% { opacity: 0.45; }
+      50% { opacity: 1; }
+    }
+    @keyframes cursor-blink {
+      50% { opacity: 0; }
+    }
+    @media (prefers-color-scheme: light) {
+      .grid { stroke: #1d4359; }
+      .geometry { stroke: #34758b; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .cursor { animation: none; }
+      .wave,
+      .orbit,
+      .marker,
+      .cursor {
+        animation: none;
+      }
     }
   </style>
 
@@ -24,57 +60,33 @@
   <text x="48" y="37" fill="#6f8b9b" font-size="12" letter-spacing="2.2">PROFILE / 00</text>
   <line x1="28" y1="55" x2="1172" y2="55" stroke="#18374a" />
 
-  <!-- Moving spacetime-style grid -->
-  <g opacity="0.82">
-    <g>
-      <path class="grid-line" d="M570 68 Q850 18 1180 72" />
-      <path class="grid-line" d="M530 102 Q855 42 1188 105" />
-      <path class="grid-line" d="M510 141 Q850 76 1195 141" />
-      <path class="grid-line" d="M500 185 Q850 118 1200 183" />
-      <path class="grid-line" d="M515 232 Q860 166 1192 225" />
-      <path class="grid-line" d="M555 277 Q865 220 1182 267" />
-      <path class="grid-faint" d="M650 58 Q600 158 664 294" />
-      <path class="grid-faint" d="M745 58 Q700 160 760 300" />
-      <path class="grid-faint" d="M845 58 Q804 164 858 300" />
-      <path class="grid-faint" d="M945 58 Q918 167 960 298" />
-      <path class="grid-faint" d="M1045 58 Q1032 168 1062 292" />
-      <animateTransform attributeName="transform" type="translate" values="0 0;-14 4;0 0" dur="12s" repeatCount="indefinite" />
-    </g>
+  <!-- Sparse coordinate field -->
+  <g opacity="0.72">
+    <path class="grid" d="M560 92 H1168 M560 150 H1168 M560 208 H1168 M620 70 V276 M790 70 V276 M960 70 V276 M1130 70 V276" />
+    <path d="M560 266 H1168" stroke="#102a3a" />
   </g>
 
-  <!-- Flat sphere and cube geometry -->
+  <!-- Minimal wireframe geometry -->
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="855" cy="176" r="74" stroke="#245268" stroke-width="1.5" />
-    <ellipse cx="855" cy="176" rx="74" ry="28" stroke="#245268" stroke-width="1.2" />
-    <ellipse cx="855" cy="176" rx="28" ry="74" stroke="#245268" stroke-width="1.2" />
-    <path d="M790 145 Q855 103 920 145" stroke="#42d6c5" stroke-width="2" />
-    <path d="M790 207 Q855 249 920 207" stroke="#42d6c5" stroke-width="2" opacity="0.55" />
+    <circle class="geometry" cx="850" cy="151" r="67" />
+    <ellipse class="geometry" cx="850" cy="151" rx="67" ry="24" />
+    <ellipse class="geometry" cx="850" cy="151" rx="24" ry="67" />
+    <path d="M789 127 Q850 91 911 127" stroke="#42d6c5" stroke-width="2" />
 
-    <path d="M1005 109 L1093 83 L1158 123 L1070 150 Z" stroke="#2d6377" stroke-width="1.6" />
-    <path d="M1005 109 L1005 215 L1070 258 L1070 150" stroke="#2d6377" stroke-width="1.6" />
-    <path d="M1070 150 L1158 123 L1158 225 L1070 258" stroke="#2d6377" stroke-width="1.6" />
-    <path d="M1036 139 L1125 112 L1125 211 L1036 238 Z" stroke="#42d6c5" stroke-width="1.6" opacity="0.72" />
-    <path d="M1005 180 L1158 180" stroke="#18374a" />
-    <path d="M1081 93 L1081 247" stroke="#18374a" />
+    <path class="geometry" d="M1020 119 L1080 91 L1140 119 L1080 148 Z
+                              M1020 119 V190 L1080 221 L1140 190 V119
+                              M1080 148 V221" />
   </g>
 
-  <!-- Animated wavefunction -->
-  <path d="M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208"
-        fill="none" stroke="#42d6c5" stroke-width="2.4" stroke-linecap="round" opacity="0.9">
-    <animate attributeName="d" dur="5.6s" repeatCount="indefinite"
-      values="M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208;
-              M515 219 C585 266 645 166 714 219 S842 269 920 219 S1050 166 1170 230;
-              M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208" />
-  </path>
+  <!-- One supporting trajectory -->
+  <path class="orbit" d="M670 225 C744 85 954 57 1148 111" opacity="0.82" />
+  <circle class="marker" cx="754" cy="123" r="4" fill="#c7a85a" />
 
-  <!-- Animated trajectory -->
-  <path id="trajectory" d="M620 265 C770 88 986 67 1170 127" fill="none" stroke="#c7a85a"
-        stroke-width="1.6" class="dash-flow" opacity="0.8">
-    <animate attributeName="stroke-dashoffset" from="0" to="-96" dur="4.5s" repeatCount="indefinite" />
-  </path>
-
-  <circle cx="770" cy="145" r="4" fill="#c7a85a" />
-  <circle cx="1044" cy="87" r="3" fill="#42d6c5" />
+  <!-- One continuous wave path -->
+  <path class="wave" d="M520 229
+                         C582 190 638 264 704 226
+                         C770 188 828 258 895 222
+                         C963 185 1037 253 1168 211" />
 
   <!-- Title block -->
   <g>
