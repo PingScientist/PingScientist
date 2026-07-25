@@ -10,12 +10,7 @@
   Physics student building simulations, interfaces, and open knowledge systems.
 </p>
 
-<p align="center">
-  <code>Physics</code>&nbsp;&nbsp;
-  <code>Scientific Computing</code>&nbsp;&nbsp;
-  <code>Web Development</code>&nbsp;&nbsp;
-  <code>Open Source</code>
-</p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/tag-physics-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/tag-physics-light.svg"><img src="./assets/tag-physics-dark.svg" height="32" alt="Physics"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/tag-computing-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/tag-computing-light.svg"><img src="./assets/tag-computing-dark.svg" height="32" alt="Scientific Computing"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/tag-web-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/tag-web-light.svg"><img src="./assets/tag-web-dark.svg" height="32" alt="Web Development"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/tag-open-source-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/tag-open-source-light.svg"><img src="./assets/tag-open-source-dark.svg" height="32" alt="Open Source"></picture></p>
 
 ---
 
