@@ -28,21 +28,75 @@
     <g class="grid" opacity="0.64">
       <animate attributeName="opacity" values="0.64;0.82;0.64" dur="12s" repeatCount="indefinite" />
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;-7 3;0 0" dur="12s" repeatCount="indefinite" />
-      <path d="M560 88 C684 67 782 114 900 92 S1072 70 1170 88" />
-      <path d="M540 134 C676 110 790 163 924 136 S1080 114 1180 134" />
-      <path d="M540 184 C680 154 792 216 932 184 S1092 160 1180 180" />
-      <path d="M560 236 C690 204 812 263 950 232 S1092 213 1180 226" />
+        values="0 0;-14 7;0 0" dur="12s" repeatCount="indefinite" />
+      <path d="M560 88 C684 67 782 114 900 92 S1072 70 1170 88">
+        <animate attributeName="d"
+          values="M560 88 C684 67 782 114 900 92 S1072 70 1170 88;
+                  M560 88 C675 53 791 129 906 88 S1080 56 1170 88;
+                  M560 88 C684 67 782 114 900 92 S1072 70 1170 88"
+          dur="13s" repeatCount="indefinite" />
+      </path>
+      <path d="M540 134 C676 110 790 163 924 136 S1080 114 1180 134">
+        <animate attributeName="d"
+          values="M540 134 C676 110 790 163 924 136 S1080 114 1180 134;
+                  M540 134 C668 96 800 178 930 130 S1090 101 1180 134;
+                  M540 134 C676 110 790 163 924 136 S1080 114 1180 134"
+          dur="15s" begin="-4s" repeatCount="indefinite" />
+      </path>
+      <path d="M540 184 C680 154 792 216 932 184 S1092 160 1180 180">
+        <animate attributeName="d"
+          values="M540 184 C680 154 792 216 932 184 S1092 160 1180 180;
+                  M540 184 C690 139 783 231 940 178 S1102 145 1180 180;
+                  M540 184 C680 154 792 216 932 184 S1092 160 1180 180"
+          dur="14s" begin="-8s" repeatCount="indefinite" />
+      </path>
+      <path d="M560 236 C690 204 812 263 950 232 S1092 213 1180 226">
+        <animate attributeName="d"
+          values="M560 236 C690 204 812 263 950 232 S1092 213 1180 226;
+                  M560 236 C681 189 822 278 956 226 S1102 199 1180 226;
+                  M560 236 C690 204 812 263 950 232 S1092 213 1180 226"
+          dur="16s" begin="-11s" repeatCount="indefinite" />
+      </path>
     </g>
     <g class="grid" opacity="0.54">
       <animate attributeName="opacity" values="0.54;0.74;0.54" dur="15s" repeatCount="indefinite" />
       <animateTransform attributeName="transform" type="skewX"
-        values="0;-1.5;0" dur="15s" repeatCount="indefinite" />
-      <path d="M620 68 C590 126 650 184 618 270" />
-      <path d="M750 65 C720 125 780 185 748 276" />
-      <path d="M880 65 C850 125 910 188 878 276" />
-      <path d="M1010 65 C980 126 1040 190 1008 270" />
-      <path d="M1140 70 C1110 130 1160 188 1136 260" />
+        values="0;-3.5;0" dur="15s" repeatCount="indefinite" />
+      <path d="M620 68 C590 126 650 184 618 270">
+        <animate attributeName="d"
+          values="M620 68 C590 126 650 184 618 270;
+                  M620 68 C574 119 670 190 612 270;
+                  M620 68 C590 126 650 184 618 270"
+          dur="14s" repeatCount="indefinite" />
+      </path>
+      <path d="M750 65 C720 125 780 185 748 276">
+        <animate attributeName="d"
+          values="M750 65 C720 125 780 185 748 276;
+                  M750 65 C704 116 801 195 741 276;
+                  M750 65 C720 125 780 185 748 276"
+          dur="16s" begin="-5s" repeatCount="indefinite" />
+      </path>
+      <path d="M880 65 C850 125 910 188 878 276">
+        <animate attributeName="d"
+          values="M880 65 C850 125 910 188 878 276;
+                  M880 65 C866 138 888 178 885 276;
+                  M880 65 C850 125 910 188 878 276"
+          dur="13s" begin="-9s" repeatCount="indefinite" />
+      </path>
+      <path d="M1010 65 C980 126 1040 190 1008 270">
+        <animate attributeName="d"
+          values="M1010 65 C980 126 1040 190 1008 270;
+                  M1010 65 C964 116 1062 200 1001 270;
+                  M1010 65 C980 126 1040 190 1008 270"
+          dur="17s" begin="-12s" repeatCount="indefinite" />
+      </path>
+      <path d="M1140 70 C1110 130 1160 188 1136 260">
+        <animate attributeName="d"
+          values="M1140 70 C1110 130 1160 188 1136 260;
+                  M1140 70 C1096 119 1178 198 1129 260;
+                  M1140 70 C1110 130 1160 188 1136 260"
+          dur="15s" begin="-7s" repeatCount="indefinite" />
+      </path>
     </g>
   </g>
 
@@ -63,53 +117,103 @@
   <g class="motion-layer">
     <circle cx="636" cy="111" r="4" fill="#42d6c5">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;20 -10;7 14;0 0" keyTimes="0;0.34;0.68;1" dur="9s" repeatCount="indefinite" />
+        values="0 0;30 -16;11 22;0 0" keyTimes="0;0.34;0.68;1" dur="9s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.7;1;0.78;0.7" dur="9s" repeatCount="indefinite" />
     </circle>
     <circle cx="714" cy="196" r="3" fill="#f4f7f8">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;-17 12;10 -13;0 0" keyTimes="0;0.38;0.72;1" dur="11s" begin="-2.5s" repeatCount="indefinite" />
+        values="0 0;-26 19;16 -21;0 0" keyTimes="0;0.38;0.72;1" dur="11s" begin="-2.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.55;0.9;0.65;0.55" dur="11s" begin="-2.5s" repeatCount="indefinite" />
     </circle>
     <circle cx="778" cy="123" r="4.5" fill="#c7a85a">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;13 15;-14 6;0 0" keyTimes="0;0.3;0.66;1" dur="13s" begin="-5s" repeatCount="indefinite" />
+        values="0 0;21 24;-23 10;0 0" keyTimes="0;0.3;0.66;1" dur="13s" begin="-5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.72;1;0.78;0.72" dur="13s" begin="-5s" repeatCount="indefinite" />
     </circle>
     <circle cx="842" cy="215" r="3.5" fill="#42d6c5">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;-11 -16;16 7;0 0" keyTimes="0;0.36;0.7;1" dur="10s" begin="-7.5s" repeatCount="indefinite" />
+        values="0 0;-18 -25;25 12;0 0" keyTimes="0;0.36;0.7;1" dur="10s" begin="-7.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.6;0.95;0.72;0.6" dur="10s" begin="-7.5s" repeatCount="indefinite" />
     </circle>
     <circle cx="902" cy="98" r="3" fill="#f4f7f8">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;10 -13;-16 11;0 0" keyTimes="0;0.32;0.64;1" dur="12s" begin="-2.5s" repeatCount="indefinite" />
+        values="0 0;16 -21;-25 18;0 0" keyTimes="0;0.32;0.64;1" dur="12s" begin="-2.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.5;0.85;0.62;0.5" dur="12s" begin="-2.5s" repeatCount="indefinite" />
     </circle>
     <circle cx="958" cy="171" r="4" fill="#42d6c5">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;19 -9;8 13;0 0" keyTimes="0;0.34;0.68;1" dur="9.5s" begin="-5s" repeatCount="indefinite" />
+        values="0 0;30 -15;13 21;0 0" keyTimes="0;0.34;0.68;1" dur="9.5s" begin="-5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.65;1;0.74;0.65" dur="9.5s" begin="-5s" repeatCount="indefinite" />
     </circle>
     <circle cx="1014" cy="226" r="3" fill="#c7a85a">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;-16 11;9 -12;0 0" keyTimes="0;0.38;0.72;1" dur="11.5s" begin="-7.5s" repeatCount="indefinite" />
+        values="0 0;-25 18;15 -20;0 0" keyTimes="0;0.38;0.72;1" dur="11.5s" begin="-7.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.58;0.94;0.68;0.58" dur="11.5s" begin="-7.5s" repeatCount="indefinite" />
     </circle>
     <circle cx="1062" cy="120" r="3.5" fill="#f4f7f8">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;12 14;-13 5;0 0" keyTimes="0;0.3;0.66;1" dur="13.5s" begin="-2.5s" repeatCount="indefinite" />
+        values="0 0;20 23;-21 9;0 0" keyTimes="0;0.3;0.66;1" dur="13.5s" begin="-2.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.52;0.88;0.64;0.52" dur="13.5s" begin="-2.5s" repeatCount="indefinite" />
     </circle>
     <circle cx="1110" cy="188" r="4" fill="#c7a85a">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;-10 -15;15 6;0 0" keyTimes="0;0.36;0.7;1" dur="10.5s" begin="-5s" repeatCount="indefinite" />
+        values="0 0;-17 -24;24 10;0 0" keyTimes="0;0.36;0.7;1" dur="10.5s" begin="-5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.64;1;0.76;0.64" dur="10.5s" begin="-5s" repeatCount="indefinite" />
     </circle>
     <circle cx="1160" cy="92" r="2.8" fill="#42d6c5">
       <animateTransform attributeName="transform" type="translate"
-        values="0 0;9 -12;-15 10;0 0" keyTimes="0;0.32;0.64;1" dur="12.5s" begin="-7.5s" repeatCount="indefinite" />
+        values="0 0;15 -20;-24 16;0 0" keyTimes="0;0.32;0.64;1" dur="12.5s" begin="-7.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.52;0.9;0.66;0.52" dur="12.5s" begin="-7.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="590" cy="164" r="2.8" fill="#42d6c5">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;25 18;-12 -22;0 0" keyTimes="0;0.31;0.69;1" dur="10.8s" begin="-3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0.88;0.62;0.5" dur="10.8s" begin="-3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="668" cy="232" r="3.2" fill="#c7a85a">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;-22 -20;27 7;0 0" keyTimes="0;0.37;0.7;1" dur="12.2s" begin="-6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.58;0.96;0.7;0.58" dur="12.2s" begin="-6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="738" cy="82" r="2.6" fill="#f4f7f8">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;18 26;-25 12;0 0" keyTimes="0;0.33;0.67;1" dur="14.2s" begin="-10s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.48;0.84;0.6;0.48" dur="14.2s" begin="-10s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="812" cy="166" r="3" fill="#42d6c5">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;-28 13;17 -24;0 0" keyTimes="0;0.35;0.72;1" dur="9.8s" begin="-4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.56;0.92;0.66;0.56" dur="9.8s" begin="-4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="872" cy="252" r="2.7" fill="#c7a85a">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;24 -23;-19 -9;0 0" keyTimes="0;0.3;0.65;1" dur="11.8s" begin="-8s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.54;0.9;0.64;0.54" dur="11.8s" begin="-8s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="930" cy="132" r="2.8" fill="#f4f7f8">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;-20 25;29 -8;0 0" keyTimes="0;0.38;0.71;1" dur="13.2s" begin="-5.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0.86;0.62;0.5" dur="13.2s" begin="-5.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="986" cy="84" r="3.2" fill="#42d6c5">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;27 16;-15 24;0 0" keyTimes="0;0.34;0.68;1" dur="8.8s" begin="-2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;1;0.72;0.6" dur="8.8s" begin="-2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1038" cy="198" r="2.6" fill="#f4f7f8">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;-26 -14;20 22;0 0" keyTimes="0;0.32;0.66;1" dur="12.8s" begin="-9s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.46;0.82;0.58;0.46" dur="12.8s" begin="-9s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1086" cy="78" r="3" fill="#c7a85a">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;16 27;-27 5;0 0" keyTimes="0;0.36;0.7;1" dur="11.2s" begin="-6.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.56;0.94;0.68;0.56" dur="11.2s" begin="-6.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1140" cy="238" r="3.2" fill="#42d6c5">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;-23 21;26 -16;0 0" keyTimes="0;0.3;0.64;1" dur="13.8s" begin="-11s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.58;0.98;0.7;0.58" dur="13.8s" begin="-11s" repeatCount="indefinite" />
     </circle>
   </g>
 
@@ -125,6 +229,16 @@
     <circle cx="1062" cy="120" r="3.5" fill="#f4f7f8" opacity="0.78" />
     <circle cx="1110" cy="188" r="4" fill="#c7a85a" />
     <circle cx="1160" cy="92" r="2.8" fill="#42d6c5" />
+    <circle cx="590" cy="164" r="2.8" fill="#42d6c5" />
+    <circle cx="668" cy="232" r="3.2" fill="#c7a85a" />
+    <circle cx="738" cy="82" r="2.6" fill="#f4f7f8" opacity="0.72" />
+    <circle cx="812" cy="166" r="3" fill="#42d6c5" />
+    <circle cx="872" cy="252" r="2.7" fill="#c7a85a" />
+    <circle cx="930" cy="132" r="2.8" fill="#f4f7f8" opacity="0.72" />
+    <circle cx="986" cy="84" r="3.2" fill="#42d6c5" />
+    <circle cx="1038" cy="198" r="2.6" fill="#f4f7f8" opacity="0.72" />
+    <circle cx="1086" cy="78" r="3" fill="#c7a85a" />
+    <circle cx="1140" cy="238" r="3.2" fill="#42d6c5" />
   </g>
 
   <!-- Title block -->

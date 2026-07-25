@@ -36,25 +36,25 @@
   <line x1="28" y1="18" x2="1172" y2="18" stroke="#102a3a" />
   <line x1="28" y1="86" x2="1172" y2="86" stroke="#102a3a" />
 
-  <path class="track" d="M252 52 C310 45 354 59 406 52 S462 48 492 52" />
-  <path class="track" d="M948 52 C890 59 846 45 794 52 S738 56 708 52" />
+  <path class="track" d="M252 52 C310 42 354 62 406 52 S462 44 492 52" />
+  <path class="track" d="M948 52 C890 62 846 42 794 52 S738 60 708 52" />
 
   <!-- Animated paths are drawn from each outside node toward the center. -->
   <g class="motion-layer">
-    <path class="signal-left" d="M252 52 C310 45 354 59 406 52 S462 48 492 52">
+    <path class="signal-left" d="M252 52 C310 42 354 62 406 52 S462 44 492 52">
       <animate attributeName="stroke-dashoffset" values="0;-96" dur="5s" repeatCount="indefinite" />
       <animate attributeName="d"
-        values="M252 52 C310 45 354 59 406 52 S462 48 492 52;
-                M252 52 C310 48 354 56 406 52 S462 51 492 52;
-                M252 52 C310 45 354 59 406 52 S462 48 492 52"
+        values="M252 52 C310 42 354 62 406 52 S462 44 492 52;
+                M252 52 C310 62 354 42 406 52 S462 60 492 52;
+                M252 52 C310 42 354 62 406 52 S462 44 492 52"
         dur="7s" repeatCount="indefinite" />
     </path>
-    <path class="signal-right" d="M948 52 C890 59 846 45 794 52 S738 56 708 52">
+    <path class="signal-right" d="M948 52 C890 62 846 42 794 52 S738 60 708 52">
       <animate attributeName="stroke-dashoffset" values="0;-96" dur="5.4s" repeatCount="indefinite" />
       <animate attributeName="d"
-        values="M948 52 C890 59 846 45 794 52 S738 56 708 52;
-                M948 52 C890 56 846 48 794 52 S738 53 708 52;
-                M948 52 C890 59 846 45 794 52 S738 56 708 52"
+        values="M948 52 C890 62 846 42 794 52 S738 60 708 52;
+                M948 52 C890 42 846 62 794 52 S738 44 708 52;
+                M948 52 C890 62 846 42 794 52 S738 60 708 52"
         dur="7.5s" repeatCount="indefinite" />
     </path>
 
@@ -74,8 +74,8 @@
 
   <!-- Complete static fallback for reduced motion -->
   <g class="static-layer">
-    <path class="signal-left" d="M252 52 C310 45 354 59 406 52 S462 48 492 52" />
-    <path class="signal-right" d="M948 52 C890 59 846 45 794 52 S738 56 708 52" />
+    <path class="signal-left" d="M252 52 C310 42 354 62 406 52 S462 44 492 52" />
+    <path class="signal-right" d="M948 52 C890 62 846 42 794 52 S738 60 708 52" />
     <circle cx="252" cy="52" r="4" fill="#42d6c5" />
     <circle cx="492" cy="52" r="4" fill="#42d6c5" />
     <circle cx="708" cy="52" r="4" fill="#c7a85a" />
