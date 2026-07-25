@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">PING SCIENTIST</title>
+  <desc id="desc">Flat animated header with curved coordinate grids, a wavefunction line, and particle trajectories.</desc>
+
+  <style>
+    text {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .grid-line { fill: none; stroke: #18374a; stroke-width: 1.2; }
+    .grid-faint { fill: none; stroke: #102a3a; stroke-width: 1; }
+    .cyan { stroke: #42d6c5; }
+    .gold { stroke: #c7a85a; }
+    .dash-flow { stroke-dasharray: 10 14; }
+    .wave-flow { stroke-dasharray: 18 10; }
+    .cursor { animation: cursor-blink 1.05s steps(2, end) infinite; }
+    @keyframes cursor-blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+    }
+  </style>
+
+  <rect width="1200" height="320" fill="#07111f" />
+  <rect x="28" y="28" width="8" height="8" fill="#42d6c5" />
+  <text x="48" y="37" fill="#6f8b9b" font-size="12" letter-spacing="2.2">PROFILE / 00</text>
+  <line x1="28" y1="55" x2="1172" y2="55" stroke="#18374a" />
+
+  <!-- Moving spacetime-style grid -->
+  <g opacity="0.82">
+    <g>
+      <path class="grid-line" d="M570 68 Q850 18 1180 72" />
+      <path class="grid-line" d="M530 102 Q855 42 1188 105" />
+      <path class="grid-line" d="M510 141 Q850 76 1195 141" />
+      <path class="grid-line" d="M500 185 Q850 118 1200 183" />
+      <path class="grid-line" d="M515 232 Q860 166 1192 225" />
+      <path class="grid-line" d="M555 277 Q865 220 1182 267" />
+      <path class="grid-faint" d="M650 58 Q600 158 664 294" />
+      <path class="grid-faint" d="M745 58 Q700 160 760 300" />
+      <path class="grid-faint" d="M845 58 Q804 164 858 300" />
+      <path class="grid-faint" d="M945 58 Q918 167 960 298" />
+      <path class="grid-faint" d="M1045 58 Q1032 168 1062 292" />
+      <animateTransform attributeName="transform" type="translate" values="0 0;-14 4;0 0" dur="12s" repeatCount="indefinite" />
+    </g>
+  </g>
+
+  <!-- Flat sphere and cube geometry -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="855" cy="176" r="74" stroke="#245268" stroke-width="1.5" />
+    <ellipse cx="855" cy="176" rx="74" ry="28" stroke="#245268" stroke-width="1.2" />
+    <ellipse cx="855" cy="176" rx="28" ry="74" stroke="#245268" stroke-width="1.2" />
+    <path d="M790 145 Q855 103 920 145" stroke="#42d6c5" stroke-width="2" />
+    <path d="M790 207 Q855 249 920 207" stroke="#42d6c5" stroke-width="2" opacity="0.55" />
+
+    <path d="M1005 109 L1093 83 L1158 123 L1070 150 Z" stroke="#2d6377" stroke-width="1.6" />
+    <path d="M1005 109 L1005 215 L1070 258 L1070 150" stroke="#2d6377" stroke-width="1.6" />
+    <path d="M1070 150 L1158 123 L1158 225 L1070 258" stroke="#2d6377" stroke-width="1.6" />
+    <path d="M1036 139 L1125 112 L1125 211 L1036 238 Z" stroke="#42d6c5" stroke-width="1.6" opacity="0.72" />
+    <path d="M1005 180 L1158 180" stroke="#18374a" />
+    <path d="M1081 93 L1081 247" stroke="#18374a" />
+  </g>
+
+  <!-- Animated wavefunction -->
+  <path d="M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208"
+        fill="none" stroke="#42d6c5" stroke-width="2.4" stroke-linecap="round" opacity="0.9">
+    <animate attributeName="d" dur="5.6s" repeatCount="indefinite"
+      values="M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208;
+              M515 219 C585 266 645 166 714 219 S842 269 920 219 S1050 166 1170 230;
+              M515 219 C585 168 645 268 714 219 S842 169 920 219 S1050 268 1170 208" />
+  </path>
+
+  <!-- Animated trajectory -->
+  <path id="trajectory" d="M620 265 C770 88 986 67 1170 127" fill="none" stroke="#c7a85a"
+        stroke-width="1.6" class="dash-flow" opacity="0.8">
+    <animate attributeName="stroke-dashoffset" from="0" to="-96" dur="4.5s" repeatCount="indefinite" />
+  </path>
+
+  <circle r="4" fill="#c7a85a">
+    <animateMotion dur="7.5s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#trajectory" />
+    </animateMotion>
+  </circle>
+  <circle r="3" fill="#42d6c5">
+    <animateMotion dur="9.5s" begin="-3s" repeatCount="indefinite" rotate="auto"
+      path="M550 118 C690 82 805 118 914 86 S1080 66 1170 94" />
+  </circle>
+
+  <!-- Title block -->
+  <g>
+    <text x="72" y="142" fill="#eef8f5" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
+    <text x="72" y="199" fill="#42d6c5" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
+    <line x1="74" y1="222" x2="446" y2="222" stroke="#c7a85a" stroke-width="2" />
+    <rect x="453" y="217" width="10" height="10" fill="#c7a85a" transform="rotate(45 458 222)" />
+    <text x="72" y="258" fill="#9cb0bb" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>
+    <rect class="cursor" x="449" y="244" width="2" height="18" fill="#42d6c5" />
+  </g>
+
+  <text x="72" y="292" fill="#456172" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
+</svg>
