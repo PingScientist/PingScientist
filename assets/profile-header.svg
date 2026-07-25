@@ -16,10 +16,6 @@
     @media (prefers-color-scheme: light) {
       .grid { stroke: #1d4359; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .motion-layer { display: none; }
-      .static-layer { display: inline; }
-    }
   </style>
 
   <rect width="1200" height="320" fill="#07111f" />
