@@ -142,125 +142,145 @@
     </g>
   </g>
 
-  <!-- All particles share one cycle: gather, expand, drift, then return to the core. -->
+  <!-- 14s particle cycle: hold 1.40s; expand 2.73s ease-out; drift 9.03s; return 0.84s ease-in. -->
   <g class="motion-layer">
     <circle class="particle-cyan" cx="636" cy="111" r="4">
       <animateTransform attributeName="transform" type="translate"
-        values="242 47;242 47;0 0;30 -16;0 0;242 47" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="242 47;242 47;0 0;30 -16;0 0;242 47" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.35;0.55;1;0.78;0.8;0.35" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="714" cy="196" r="3">
       <animateTransform attributeName="transform" type="translate"
-        values="171 -28;171 -28;0 0;-26 19;0 0;171 -28" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="171 -28;171 -28;0 0;-26 19;0 0;171 -28" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.25;0.5;0.9;0.62;0.72;0.25" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="778" cy="123" r="4.5">
       <animateTransform attributeName="transform" type="translate"
-        values="113 37;113 37;0 0;21 24;0 0;113 37" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="113 37;113 37;0 0;21 24;0 0;113 37" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.3;0.58;1;0.75;0.82;0.3" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="842" cy="215" r="3.5">
       <animateTransform attributeName="transform" type="translate"
-        values="41 -43;41 -43;0 0;-18 -25;0 0;41 -43" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="41 -43;41 -43;0 0;-18 -25;0 0;41 -43" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.3;0.52;0.95;0.7;0.78;0.3" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="902" cy="98" r="3">
       <animateTransform attributeName="transform" type="translate"
-        values="-13 66;-13 66;0 0;16 -21;0 0;-13 66" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-13 66;-13 66;0 0;16 -21;0 0;-13 66" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.22;0.48;0.86;0.6;0.7;0.22" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="958" cy="171" r="4">
       <animateTransform attributeName="transform" type="translate"
-        values="-78 -13;-78 -13;0 0;30 -15;0 0;-78 -13" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-78 -13;-78 -13;0 0;30 -15;0 0;-78 -13" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.3;0.55;1;0.72;0.8;0.3" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="1014" cy="226" r="3">
       <animateTransform attributeName="transform" type="translate"
-        values="-122 -57;-122 -57;0 0;-25 18;0 0;-122 -57" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-122 -57;-122 -57;0 0;-25 18;0 0;-122 -57" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.25;0.5;0.94;0.66;0.74;0.25" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="1062" cy="120" r="3.5">
       <animateTransform attributeName="transform" type="translate"
-        values="-178 42;-178 42;0 0;20 23;0 0;-178 42" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-178 42;-178 42;0 0;20 23;0 0;-178 42" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.24;0.48;0.88;0.62;0.72;0.24" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="1110" cy="188" r="4">
       <animateTransform attributeName="transform" type="translate"
-        values="-220 -17;-220 -17;0 0;-17 -24;0 0;-220 -17" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-220 -17;-220 -17;0 0;-17 -24;0 0;-220 -17" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.3;0.55;1;0.74;0.8;0.3" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="1160" cy="92" r="2.8">
       <animateTransform attributeName="transform" type="translate"
-        values="-278 65;-278 65;0 0;15 -20;0 0;-278 65" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-278 65;-278 65;0 0;15 -20;0 0;-278 65" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.2;0.45;0.9;0.64;0.7;0.2" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="590" cy="164" r="2.8">
       <animateTransform attributeName="transform" type="translate"
-        values="298 2;298 2;0 0;25 18;0 0;298 2" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="298 2;298 2;0 0;25 18;0 0;298 2" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.2;0.46;0.88;0.62;0.7;0.2" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="668" cy="232" r="3.2">
       <animateTransform attributeName="transform" type="translate"
-        values="211 -62;211 -62;0 0;-22 -20;0 0;211 -62" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="211 -62;211 -62;0 0;-22 -20;0 0;211 -62" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.25;0.5;0.96;0.68;0.76;0.25" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="738" cy="82" r="2.6">
       <animateTransform attributeName="transform" type="translate"
-        values="155 77;155 77;0 0;18 26;0 0;155 77" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="155 77;155 77;0 0;18 26;0 0;155 77" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.2;0.44;0.84;0.58;0.68;0.2" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="812" cy="166" r="3">
       <animateTransform attributeName="transform" type="translate"
-        values="69 -3;69 -3;0 0;-28 13;0 0;69 -3" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="69 -3;69 -3;0 0;-28 13;0 0;69 -3" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.25;0.5;0.92;0.64;0.74;0.25" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="872" cy="252" r="2.7">
       <animateTransform attributeName="transform" type="translate"
-        values="15 -80;15 -80;0 0;24 -23;0 0;15 -80" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="15 -80;15 -80;0 0;24 -23;0 0;15 -80" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.22;0.46;0.9;0.62;0.7;0.22" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="930" cy="132" r="2.8">
       <animateTransform attributeName="transform" type="translate"
-        values="-40 28;-40 28;0 0;-20 25;0 0;-40 28" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-40 28;-40 28;0 0;-20 25;0 0;-40 28" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.22;0.46;0.86;0.6;0.68;0.22" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="986" cy="84" r="3.2">
       <animateTransform attributeName="transform" type="translate"
-        values="-103 82;-103 82;0 0;27 16;0 0;-103 82" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-103 82;-103 82;0 0;27 16;0 0;-103 82" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.25;0.52;1;0.7;0.78;0.25" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-white" cx="1038" cy="198" r="2.6">
       <animateTransform attributeName="transform" type="translate"
-        values="-146 -34;-146 -34;0 0;-26 -14;0 0;-146 -34" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-146 -34;-146 -34;0 0;-26 -14;0 0;-146 -34" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.2;0.44;0.82;0.56;0.66;0.2" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-gold" cx="1086" cy="78" r="3">
       <animateTransform attributeName="transform" type="translate"
-        values="-205 81;-205 81;0 0;16 27;0 0;-205 81" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-205 81;-205 81;0 0;16 27;0 0;-205 81" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.24;0.48;0.94;0.66;0.74;0.24" dur="14s" repeatCount="indefinite" />
     </circle>
     <circle class="particle-cyan" cx="1140" cy="238" r="3.2">
       <animateTransform attributeName="transform" type="translate"
-        values="-251 -68;-251 -68;0 0;-23 21;0 0;-251 -68" keyTimes="0;0.1;0.4;0.72;0.9;1"
+        values="-251 -68;-251 -68;0 0;-23 21;0 0;-251 -68" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
+        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
         dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.24;0.5;0.98;0.68;0.76;0.24" dur="14s" repeatCount="indefinite" />
     </circle>
