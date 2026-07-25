@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 104" role="img" aria-labelledby="title desc">
   <title id="title">Contact signal</title>
-  <desc id="desc">Two restrained signals travel inward from GitHub and email toward PingScientist.</desc>
+  <desc id="desc">Two animated signals travel inward from GitHub and email toward PingScientist.</desc>
 
   <style>
     text {
@@ -20,44 +20,19 @@
       stroke-width: 1.8;
       stroke-linecap: round;
       stroke-dasharray: 10 14;
-      transform-box: fill-box;
-      transform-origin: center;
     }
-    .signal-left {
-      stroke: #42d6c5;
-      animation: flow-in 5s linear infinite, wave-left 7s ease-in-out infinite;
-    }
-    .signal-right {
-      stroke: #c7a85a;
-      animation: flow-in 5.4s linear infinite, wave-right 7.5s ease-in-out infinite;
-    }
-    .node { animation: node-pulse 3s ease-in-out infinite; }
-    @keyframes flow-in {
-      to { stroke-dashoffset: -96; }
-    }
-    @keyframes wave-left {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
-    }
-    @keyframes wave-right {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(2px); }
-    }
-    @keyframes node-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
+    .signal-left { stroke: #42d6c5; }
+    .signal-right { stroke: #c7a85a; }
+    .motion-layer { display: inline; }
+    .static-layer { display: none; }
     @media (prefers-color-scheme: light) {
       .frame { stroke: #2d6377; }
       .meta { fill: #b7c8d1; }
       .track { stroke: #245268; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .signal-left,
-      .signal-right,
-      .node {
-        animation: none;
-      }
+      .motion-layer { display: none; }
+      .static-layer { display: inline; }
     }
   </style>
 
@@ -65,16 +40,51 @@
   <line x1="28" y1="18" x2="1172" y2="18" stroke="#102a3a" />
   <line x1="28" y1="86" x2="1172" y2="86" stroke="#102a3a" />
 
-  <!-- Paths are drawn from each outside node toward the center. -->
   <path class="track" d="M252 52 C310 45 354 59 406 52 S462 48 492 52" />
   <path class="track" d="M948 52 C890 59 846 45 794 52 S738 56 708 52" />
-  <path class="signal-left" d="M252 52 C310 45 354 59 406 52 S462 48 492 52" />
-  <path class="signal-right" d="M948 52 C890 59 846 45 794 52 S738 56 708 52" />
 
-  <circle cx="252" cy="52" r="4" fill="#42d6c5" />
-  <circle class="node" cx="492" cy="52" r="4" fill="#42d6c5" />
-  <circle class="node" cx="708" cy="52" r="4" fill="#c7a85a" />
-  <circle cx="948" cy="52" r="4" fill="#c7a85a" />
+  <!-- Animated paths are drawn from each outside node toward the center. -->
+  <g class="motion-layer">
+    <path class="signal-left" d="M252 52 C310 45 354 59 406 52 S462 48 492 52">
+      <animate attributeName="stroke-dashoffset" values="0;-96" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="d"
+        values="M252 52 C310 45 354 59 406 52 S462 48 492 52;
+                M252 52 C310 48 354 56 406 52 S462 51 492 52;
+                M252 52 C310 45 354 59 406 52 S462 48 492 52"
+        dur="7s" repeatCount="indefinite" />
+    </path>
+    <path class="signal-right" d="M948 52 C890 59 846 45 794 52 S738 56 708 52">
+      <animate attributeName="stroke-dashoffset" values="0;-96" dur="5.4s" repeatCount="indefinite" />
+      <animate attributeName="d"
+        values="M948 52 C890 59 846 45 794 52 S738 56 708 52;
+                M948 52 C890 56 846 48 794 52 S738 53 708 52;
+                M948 52 C890 59 846 45 794 52 S738 56 708 52"
+        dur="7.5s" repeatCount="indefinite" />
+    </path>
+
+    <circle cx="252" cy="52" r="4" fill="#42d6c5">
+      <animate attributeName="opacity" values="0.65;1;0.65" dur="3.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="492" cy="52" r="4" fill="#42d6c5">
+      <animate attributeName="opacity" values="0.45;1;0.45" dur="3s" begin="-1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="708" cy="52" r="4" fill="#c7a85a">
+      <animate attributeName="opacity" values="0.45;1;0.45" dur="3s" begin="-1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="948" cy="52" r="4" fill="#c7a85a">
+      <animate attributeName="opacity" values="0.65;1;0.65" dur="3.6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Complete static fallback for reduced motion -->
+  <g class="static-layer">
+    <path class="signal-left" d="M252 52 C310 45 354 59 406 52 S462 48 492 52" />
+    <path class="signal-right" d="M948 52 C890 59 846 45 794 52 S738 56 708 52" />
+    <circle cx="252" cy="52" r="4" fill="#42d6c5" />
+    <circle cx="492" cy="52" r="4" fill="#42d6c5" />
+    <circle cx="708" cy="52" r="4" fill="#c7a85a" />
+    <circle cx="948" cy="52" r="4" fill="#c7a85a" />
+  </g>
 
   <text class="label" x="56" y="49" font-size="16" font-weight="700" letter-spacing="1.8">GITHUB</text>
   <text class="meta" x="56" y="68" font-size="10" letter-spacing="1.5">SOURCE</text>
