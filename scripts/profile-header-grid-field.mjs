@@ -9,10 +9,12 @@ export const FRAME_RATE = 20;
 export const FRAME_COUNT = DURATION_SECONDS * FRAME_RATE;
 export const HORIZONTAL_BASELINES = [78, 123, 168, 213, 258];
 export const VERTICAL_BASELINES = [120, 280, 440, 600, 760, 920, 1080];
+export const OVERSCAN_X = 120;
+export const OVERSCAN_Y = 96;
 
-const FIELD_SIGMA_X = 270;
-const FIELD_SIGMA_Y = 108;
-const SOURCE_KEYFRAME_COUNT = 41;
+const FIELD_SIGMA_X = 310;
+const FIELD_SIGMA_Y = 128;
+const SOURCE_KEYFRAME_COUNT = 21;
 
 function phaseAt(timeSeconds) {
   return (Math.PI * 2 * timeSeconds) / DURATION_SECONDS;
@@ -36,32 +38,34 @@ export function warpPoint(x, y, timeSeconds) {
   const state = fieldState(timeSeconds);
   const normalizedX = (x - state.centerX) / FIELD_SIGMA_X;
   const normalizedY = (y - state.centerY) / FIELD_SIGMA_Y;
-  const gaussian = Math.exp(
-    -0.5 * (normalizedX * normalizedX + normalizedY * normalizedY),
+  const radiusSquared =
+    normalizedX * normalizedX + normalizedY * normalizedY;
+  // The quadratic term keeps the well broad. The quartic tail makes the
+  // displacement and its derivatives approach zero before the viewport sides
+  // without a clamp, mask, or fixed-radius cutoff.
+  const smoothEnvelope = Math.exp(
+    -0.5 * (radiusSquared + 0.55 * radiusSquared * radiusSquared),
   );
-  const edgeWindow =
-    Math.sin((Math.PI * x) / WIDTH) * Math.sin((Math.PI * y) / HEIGHT);
-  const edgeBreath = 3.5 * Math.sin(state.phase + 0.3) * edgeWindow;
 
   return {
     x:
       x +
-      gaussian *
+      smoothEnvelope *
         (state.horizontalStrength -
           state.shearStrength * 0.82 * normalizedY),
     y:
       y +
-      gaussian *
+      smoothEnvelope *
         (state.verticalStrength +
-          state.shearStrength * 1.18 * normalizedX) +
-      edgeBreath,
+          state.shearStrength * 1.18 * normalizedX),
   };
 }
 
 function sampleLine(kind, baseline, timeSeconds) {
-  const start = kind === "horizontal" ? 20 : 60;
-  const end = kind === "horizontal" ? 1180 : 304;
-  const step = kind === "horizontal" ? 20 : 8;
+  const start = kind === "horizontal" ? -OVERSCAN_X : -OVERSCAN_Y;
+  const end =
+    kind === "horizontal" ? WIDTH + OVERSCAN_X : HEIGHT + OVERSCAN_Y;
+  const step = kind === "horizontal" ? 16 : 8;
   const points = [];
 
   for (let value = start; value <= end; value += step) {
@@ -87,32 +91,43 @@ function format(value) {
   return Number(value.toFixed(2)).toString();
 }
 
-function pointsToHermitePath(points) {
-  const tangents = points.map((point, index) => {
-    const previous = points[Math.max(0, index - 1)];
-    const next = points[Math.min(points.length - 1, index + 1)];
-    const divisor = index === 0 || index === points.length - 1 ? 1 : 2;
-    return {
-      x: (next.x - previous.x) / divisor,
-      y: (next.y - previous.y) / divisor,
-    };
-  });
+function weightedPoint(points, weights) {
+  return weights.reduce(
+    (result, [index, weight]) => ({
+      x: result.x + points[index].x * weight,
+      y: result.y + points[index].y * weight,
+    }),
+    { x: 0, y: 0 },
+  );
+}
 
-  let d = `M${format(points[0].x)} ${format(points[0].y)}`;
-  for (let index = 0; index < points.length - 1; index += 1) {
-    const current = points[index];
-    const next = points[index + 1];
-    const currentTangent = tangents[index];
-    const nextTangent = tangents[index + 1];
-    const control1 = {
-      x: current.x + currentTangent.x / 3,
-      y: current.y + currentTangent.y / 3,
-    };
-    const control2 = {
-      x: next.x - nextTangent.x / 3,
-      y: next.y - nextTangent.y / 3,
-    };
-    d += ` C${format(control1.x)} ${format(control1.y)} ${format(control2.x)} ${format(control2.y)} ${format(next.x)} ${format(next.y)}`;
+function pointsToBSplinePath(points) {
+  if (points.length < 4) {
+    throw new Error("A cubic B-spline requires at least four sample points.");
+  }
+
+  const first = weightedPoint(points, [
+    [0, 1 / 6],
+    [1, 4 / 6],
+    [2, 1 / 6],
+  ]);
+  let d = `M${format(first.x)} ${format(first.y)}`;
+
+  for (let index = 0; index < points.length - 3; index += 1) {
+    const control1 = weightedPoint(points, [
+      [index + 1, 4 / 6],
+      [index + 2, 2 / 6],
+    ]);
+    const control2 = weightedPoint(points, [
+      [index + 1, 2 / 6],
+      [index + 2, 4 / 6],
+    ]);
+    const end = weightedPoint(points, [
+      [index + 1, 1 / 6],
+      [index + 2, 4 / 6],
+      [index + 3, 1 / 6],
+    ]);
+    d += ` C${format(control1.x)} ${format(control1.y)} ${format(control2.x)} ${format(control2.y)} ${format(end.x)} ${format(end.y)}`;
   }
   return d;
 }
@@ -120,10 +135,10 @@ function pointsToHermitePath(points) {
 export function gridPathsAt(timeSeconds) {
   return {
     horizontal: HORIZONTAL_BASELINES.map((baseline) =>
-      pointsToHermitePath(sampleLine("horizontal", baseline, timeSeconds)),
+      pointsToBSplinePath(sampleLine("horizontal", baseline, timeSeconds)),
     ),
     vertical: VERTICAL_BASELINES.map((baseline) =>
-      pointsToHermitePath(sampleLine("vertical", baseline, timeSeconds)),
+      pointsToBSplinePath(sampleLine("vertical", baseline, timeSeconds)),
     ),
   };
 }
@@ -138,13 +153,17 @@ function interpolatePoint(pointA, pointB, amount) {
 function interpolatedLine(kind, baseline, timeSeconds) {
   const normalizedTime =
     ((timeSeconds % DURATION_SECONDS) + DURATION_SECONDS) % DURATION_SECONDS;
-  const sourceFrame = normalizedTime * 2;
+  const sourceInterval =
+    DURATION_SECONDS / (SOURCE_KEYFRAME_COUNT - 1);
+  const sourceFrame = normalizedTime / sourceInterval;
   const lowerIndex = Math.floor(sourceFrame);
   const upperIndex = (lowerIndex + 1) % (SOURCE_KEYFRAME_COUNT - 1);
   const amount = sourceFrame - lowerIndex;
-  const lowerTime = lowerIndex / 2;
+  const lowerTime = lowerIndex * sourceInterval;
   const upperTime =
-    upperIndex === 0 ? DURATION_SECONDS : upperIndex / 2;
+    upperIndex === 0
+      ? DURATION_SECONDS
+      : upperIndex * sourceInterval;
   const lower = sampleLine(kind, baseline, lowerTime);
   const upper = sampleLine(kind, baseline, upperTime);
   return lower.map((point, index) =>
@@ -196,6 +215,12 @@ export function validateTimeline() {
   let familyIntersections = 0;
   let minimumHorizontalStep = Number.POSITIVE_INFINITY;
   let minimumVerticalStep = Number.POSITIVE_INFINITY;
+  let maximumTransitionSlopeDelta = 0;
+  let maximumTransitionCurvatureDelta = 0;
+  let maximumVisibleSideSlope = 0;
+  let maximumVisibleTopBottomSlope = 0;
+  let minimumHorizontalEndpointOverscan = Number.POSITIVE_INFINITY;
+  let minimumVerticalEndpointOverscan = Number.POSITIVE_INFINITY;
 
   for (let frame = 0; frame < FRAME_COUNT; frame += 1) {
     const time = frame / FRAME_RATE;
@@ -211,12 +236,67 @@ export function validateTimeline() {
       countFamilyIntersections(verticalLines);
 
     for (const line of horizontalLines) {
+      const slopes = [];
       for (let index = 1; index < line.length; index += 1) {
         minimumHorizontalStep = Math.min(
           minimumHorizontalStep,
           line[index].x - line[index - 1].x,
         );
+        const deltaX = line[index].x - line[index - 1].x;
+        const slope = (line[index].y - line[index - 1].y) / deltaX;
+        const midpointX = (line[index].x + line[index - 1].x) / 2;
+        slopes.push({ slope, midpointX, deltaX });
+        if (midpointX < 80 || midpointX > WIDTH - 80) {
+          maximumVisibleSideSlope = Math.max(
+            maximumVisibleSideSlope,
+            Math.abs(slope),
+          );
+        }
       }
+      const curvatures = [];
+      for (let index = 1; index < slopes.length; index += 1) {
+        const midpointX =
+          (slopes[index].midpointX + slopes[index - 1].midpointX) / 2;
+        const slopeDelta = slopes[index].slope - slopes[index - 1].slope;
+        const transition =
+          (midpointX >= 80 && midpointX <= 420) ||
+          (midpointX >= WIDTH - 420 && midpointX <= WIDTH - 80);
+        if (transition) {
+          maximumTransitionSlopeDelta = Math.max(
+            maximumTransitionSlopeDelta,
+            Math.abs(slopeDelta),
+          );
+        }
+        curvatures.push({
+          value:
+            slopeDelta /
+            ((slopes[index].deltaX + slopes[index - 1].deltaX) / 2),
+          midpointX,
+        });
+      }
+      for (let index = 1; index < curvatures.length; index += 1) {
+        const midpointX =
+          (curvatures[index].midpointX +
+            curvatures[index - 1].midpointX) /
+          2;
+        const transition =
+          (midpointX >= 80 && midpointX <= 420) ||
+          (midpointX >= WIDTH - 420 && midpointX <= WIDTH - 80);
+        if (transition) {
+          maximumTransitionCurvatureDelta = Math.max(
+            maximumTransitionCurvatureDelta,
+            Math.abs(
+              curvatures[index].value -
+                curvatures[index - 1].value,
+            ),
+          );
+        }
+      }
+      minimumHorizontalEndpointOverscan = Math.min(
+        minimumHorizontalEndpointOverscan,
+        -line[0].x,
+        line[line.length - 1].x - WIDTH,
+      );
     }
     for (const line of verticalLines) {
       for (let index = 1; index < line.length; index += 1) {
@@ -224,7 +304,21 @@ export function validateTimeline() {
           minimumVerticalStep,
           line[index].y - line[index - 1].y,
         );
+        const deltaY = line[index].y - line[index - 1].y;
+        const slope = (line[index].x - line[index - 1].x) / deltaY;
+        const midpointY = (line[index].y + line[index - 1].y) / 2;
+        if (midpointY < 40 || midpointY > HEIGHT - 40) {
+          maximumVisibleTopBottomSlope = Math.max(
+            maximumVisibleTopBottomSlope,
+            Math.abs(slope),
+          );
+        }
       }
+      minimumVerticalEndpointOverscan = Math.min(
+        minimumVerticalEndpointOverscan,
+        -line[0].y,
+        line[line.length - 1].y - HEIGHT,
+      );
     }
 
     for (let line = 0; line < horizontalLines.length - 1; line += 1) {
@@ -246,12 +340,12 @@ export function validateTimeline() {
       }
     }
 
-    for (let y = 60; y <= 304; y += 8) {
-      for (let x = 20; x <= 1180; x += 20) {
+    for (let y = 0; y <= HEIGHT; y += 8) {
+      for (let x = 0; x <= WIDTH; x += 16) {
         const point = warpPoint(x, y, time);
         const displacement = Math.hypot(point.x - x, point.y - y);
         maximumDisplacement = Math.max(maximumDisplacement, displacement);
-        if (x <= 20 || x >= 1180) {
+        if (x === 0 || x === WIDTH) {
           maximumSideEdgeDisplacement = Math.max(
             maximumSideEdgeDisplacement,
             displacement,
@@ -324,12 +418,20 @@ export function validateTimeline() {
     minimumVerticalGap,
     minimumHorizontalStep,
     minimumVerticalStep,
+    maximumTransitionSlopeDelta,
+    maximumTransitionCurvatureDelta,
+    maximumVisibleSideSlope,
+    maximumVisibleTopBottomSlope,
+    minimumHorizontalEndpointOverscan,
+    minimumVerticalEndpointOverscan,
     maximumDisplacement,
     maximumSideEdgeDisplacement,
     centerDriftX: 78,
     centerDriftY: 22,
     influenceWidth: FIELD_SIGMA_X * 2,
     influenceHeight: FIELD_SIGMA_Y * 2,
+    overscanX: OVERSCAN_X,
+    overscanY: OVERSCAN_Y,
     maximumClosurePositionError: Math.max(...closureSamples),
     maximumClosureVelocityError: Math.max(...closureVelocitySamples),
   };
@@ -340,7 +442,11 @@ export function validateTimeline() {
     minimumHorizontalGap <= 0 ||
     minimumVerticalGap <= 0 ||
     minimumHorizontalStep <= 0 ||
-    minimumVerticalStep <= 0
+    minimumVerticalStep <= 0 ||
+    maximumTransitionSlopeDelta >= 0.08 ||
+    maximumTransitionCurvatureDelta >= 0.004 ||
+    minimumHorizontalEndpointOverscan < 80 ||
+    minimumVerticalEndpointOverscan < 64
   ) {
     throw new Error(`Grid topology validation failed:\n${JSON.stringify(report, null, 2)}`);
   }
@@ -351,17 +457,17 @@ export function validateTimeline() {
 function sourceTimes() {
   return Array.from(
     { length: SOURCE_KEYFRAME_COUNT },
-    (_, index) => index / 2,
+    (_, index) => index,
   );
 }
 
 function animatedPathMarkup(kind, baseline, index) {
   const values = sourceTimes()
     .map((time) =>
-      pointsToHermitePath(sampleLine(kind, baseline, time)),
+      pointsToBSplinePath(sampleLine(kind, baseline, time)),
     )
     .join(";\n          ");
-  const initial = pointsToHermitePath(sampleLine(kind, baseline, 0));
+  const initial = pointsToBSplinePath(sampleLine(kind, baseline, 0));
   return `      <path data-grid-kind="${kind}" data-grid-index="${index}" d="${initial}">
         <animate attributeName="d" values="${values}"
           dur="${DURATION_SECONDS}s" calcMode="linear" repeatCount="indefinite" />
@@ -377,7 +483,7 @@ function motionGridMarkup() {
   ).join("\n");
 
   return `  <!-- Shared periodic deformation field. Every grid line is sampled from
-       the same Gaussian field; no per-line phase, skew, or independent morph. -->
+       the same smooth analytic field; no per-line phase, skew, or independent morph. -->
   <g class="motion-layer">
     <g class="grid" opacity="0.68" data-grid-field="continuous">
       <animate attributeName="opacity" values="0.58;0.76;0.66;0.74;0.58"
