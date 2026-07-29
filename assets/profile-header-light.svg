@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
   <title id="title">PING SCIENTIST</title>
-  <desc id="desc">An animated scientific header where the title types in, particles expand from a compact core, and a warped coordinate field slowly evolves.</desc>
+  <desc id="desc">A centered scientific title types in while particles burst outward, rebound from the title and frame, and a warped coordinate field continuously evolves.</desc>
 
   <defs>
     <clipPath id="type-ping">
-      <rect x="72" y="92" width="0" height="60">
+      <rect x="410" y="80" width="0" height="60">
         <animate attributeName="width" values="0;0;38;76;114;152;152;0"
           keyTimes="0;0.02;0.0475;0.075;0.1025;0.13;0.94;1"
           calcMode="discrete" dur="14s" repeatCount="indefinite" />
       </rect>
     </clipPath>
     <clipPath id="type-scientist">
-      <rect x="72" y="149" width="0" height="62">
+      <rect x="410" y="137" width="0" height="62">
         <animate attributeName="width"
           values="0;0;37;74;111;148;185;222;259;296;330;330;0"
           keyTimes="0;0.13;0.152;0.174;0.196;0.218;0.24;0.262;0.284;0.306;0.33;0.94;1"
@@ -19,11 +19,27 @@
       </rect>
     </clipPath>
     <clipPath id="type-subtitle">
-      <rect x="72" y="238" width="0" height="28">
+      <rect x="410" y="226" width="0" height="28">
         <animate attributeName="width" values="0;0;354;354;0"
           keyTimes="0;0.33;0.52;0.94;1" dur="14s" repeatCount="indefinite" />
       </rect>
     </clipPath>
+    <!-- A glyph-shaped safety mask is the final collision surface. The small
+         stroke expansion matches the largest particle radius without creating
+         a rectangular invisible wall around the title. -->
+    <mask id="text-collision-mask" x="0" y="0" width="1200" height="320"
+      maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+      <rect width="1200" height="320" fill="#fff" />
+      <g fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round">
+        <text x="410" y="130" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
+        <text x="410" y="187" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
+        <text x="410" y="246" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>
+        <text x="410" y="286" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
+      </g>
+      <line x1="412" y1="210" x2="770" y2="210" stroke="#000" stroke-width="9" />
+      <rect x="774" y="202" width="16" height="16" rx="2" fill="#000"
+        transform="rotate(45 782 210)" />
+    </mask>
   </defs>
 
   <style>
@@ -45,7 +61,13 @@
     .gold-fill, .particle-gold { fill: #8a6a20; }
     .gold-stroke { stroke: #8a6a20; }
     .motion-layer { display: inline; }
+    .static-layer { display: none; }
+    .particle { opacity: 0.92; }
 
+    @media (prefers-reduced-motion: reduce) {
+      .motion-layer { display: none; }
+      .static-layer { display: inline; }
+    }
   </style>
 
   <rect class="surface" width="1200" height="320" />
@@ -60,36 +82,36 @@
         dur="14s" repeatCount="indefinite" />
       <animateTransform attributeName="transform" type="translate"
         values="0 0;-18 9;7 -5;0 0" dur="14s" repeatCount="indefinite" />
-      <path d="M548 88 C674 63 784 119 902 92 S1072 67 1180 88">
+      <path d="M20 86 C220 78 370 72 500 88 C552 96 578 115 600 120 C622 115 648 96 700 88 C830 72 980 78 1180 86">
         <animate attributeName="d"
-          values="M548 88 C674 63 784 119 902 92 S1072 67 1180 88;
-                  M548 88 C656 43 803 139 916 83 S1090 47 1180 88;
-                  M548 88 C688 78 772 101 894 100 S1058 82 1180 88;
-                  M548 88 C674 63 784 119 902 92 S1072 67 1180 88"
+          values="M20 86 C220 78 370 72 500 88 C552 96 578 115 600 120 C622 115 648 96 700 88 C830 72 980 78 1180 86;
+                  M20 86 C220 70 380 63 506 84 C560 96 580 132 600 141 C620 132 640 96 694 84 C820 63 980 70 1180 86;
+                  M20 86 C210 83 362 80 494 91 C548 97 578 105 600 108 C622 105 652 97 706 91 C838 80 990 83 1180 86;
+                  M20 86 C220 78 370 72 500 88 C552 96 578 115 600 120 C622 115 648 96 700 88 C830 72 980 78 1180 86"
           dur="14s" repeatCount="indefinite" />
       </path>
-      <path d="M536 134 C670 105 792 169 926 136 S1082 109 1184 134">
+      <path d="M20 137 C212 128 370 119 500 139 C554 149 578 169 600 176 C622 169 646 149 700 139 C830 119 988 128 1180 137">
         <animate attributeName="d"
-          values="M536 134 C670 105 792 169 926 136 S1082 109 1184 134;
-                  M536 134 C651 83 815 191 942 124 S1100 87 1184 134;
-                  M536 134 C687 121 776 151 913 148 S1067 127 1184 134;
-                  M536 134 C670 105 792 169 926 136 S1082 109 1184 134"
+          values="M20 137 C212 128 370 119 500 139 C554 149 578 169 600 176 C622 169 646 149 700 139 C830 119 988 128 1180 137;
+                  M20 137 C216 119 376 105 506 132 C562 145 582 184 600 194 C618 184 638 145 694 132 C824 105 984 119 1180 137;
+                  M20 137 C208 134 364 130 494 143 C548 150 578 159 600 162 C622 159 652 150 706 143 C836 130 992 134 1180 137;
+                  M20 137 C212 128 370 119 500 139 C554 149 578 169 600 176 C622 169 646 149 700 139 C830 119 988 128 1180 137"
           dur="15s" begin="-4s" repeatCount="indefinite" />
       </path>
-      <path d="M536 184 C678 149 794 221 934 184 S1094 155 1184 180">
+      <path d="M20 190 C216 199 376 207 504 187 C558 178 580 158 600 151 C620 158 642 178 696 187 C824 207 984 199 1180 190">
         <animate attributeName="d"
-          values="M536 184 C678 149 794 221 934 184 S1094 155 1184 180;
-                  M536 184 C700 128 775 244 951 171 S1112 132 1184 180;
-                  M536 184 C659 167 815 202 920 196 S1076 176 1184 180;
-                  M536 184 C678 149 794 221 934 184 S1094 155 1184 180"
+          values="M20 190 C216 199 376 207 504 187 C558 178 580 158 600 151 C620 158 642 178 696 187 C824 207 984 199 1180 190;
+                  M20 190 C216 209 382 222 510 193 C564 180 584 145 600 135 C616 145 636 180 690 193 C818 222 984 209 1180 190;
+                  M20 190 C210 194 368 197 496 184 C550 178 578 169 600 166 C622 169 650 178 704 184 C832 197 990 194 1180 190;
+                  M20 190 C216 199 376 207 504 187 C558 178 580 158 600 151 C620 158 642 178 696 187 C824 207 984 199 1180 190"
           dur="13s" begin="-8s" repeatCount="indefinite" />
       </path>
-      <path d="M548 238 C688 199 814 269 952 232 S1095 207 1184 226">
+      <path d="M20 246 C220 254 378 262 504 242 C558 233 580 213 600 206 C620 213 642 233 696 242 C822 262 980 254 1180 246">
         <animate attributeName="d"
-          values="M548 238 C688 199 814 269 952 232 S1095 207 1184 226;
-                  M548 238 C668 177 839 291 970 217 S1112 185 1184 226;
-                  M548 238 C706 218 795 249 937 246 S1080 225 1184 226;
-                  M548 238 C688 199 814 269 952 232 S1095 207 1184 226"
+          values="M20 246 C220 254 378 262 504 242 C558 233 580 213 600 206 C620 213 642 233 696 242 C822 262 980 254 1180 246;
+                  M20 246 C220 267 384 278 510 249 C564 237 584 198 600 188 C616 198 636 237 690 249 C816 278 980 267 1180 246;
+                  M20 246 C214 249 370 252 496 239 C550 233 578 224 600 221 C622 224 650 233 704 239 C830 252 986 249 1180 246;
+                  M20 246 C220 254 378 262 504 242 C558 233 580 213 600 206 C620 213 642 233 696 242 C822 262 980 254 1180 246"
           dur="16s" begin="-11s" repeatCount="indefinite" />
       </path>
     </g>
@@ -99,216 +121,237 @@
         dur="15s" repeatCount="indefinite" />
       <animateTransform attributeName="transform" type="skewX"
         values="0;-5;2.5;0" dur="15s" repeatCount="indefinite" />
-      <path d="M620 68 C582 124 657 188 618 270">
+      <path d="M198 64 C188 126 208 220 196 302">
         <animate attributeName="d"
-          values="M620 68 C582 124 657 188 618 270;
-                  M620 68 C556 112 684 201 604 270;
-                  M620 68 C604 141 632 173 628 270;
-                  M620 68 C582 124 657 188 618 270"
+          values="M198 64 C188 126 208 220 196 302;
+                  M198 64 C174 124 222 222 190 302;
+                  M198 64 C202 130 194 216 204 302;
+                  M198 64 C188 126 208 220 196 302"
           dur="14s" repeatCount="indefinite" />
       </path>
-      <path d="M750 65 C712 123 787 190 748 276">
+      <path d="M402 64 C430 119 448 213 404 302">
         <animate attributeName="d"
-          values="M750 65 C712 123 787 190 748 276;
-                  M750 65 C687 107 814 205 734 276;
-                  M750 65 C735 143 761 175 758 276;
-                  M750 65 C712 123 787 190 748 276"
+          values="M402 64 C430 119 448 213 404 302;
+                  M402 64 C452 110 470 224 392 302;
+                  M402 64 C416 132 426 202 414 302;
+                  M402 64 C430 119 448 213 404 302"
           dur="16s" begin="-5s" repeatCount="indefinite" />
       </path>
-      <path d="M880 65 C842 124 917 191 878 276">
+      <path d="M600 64 C520 122 680 211 600 302">
         <animate attributeName="d"
-          values="M880 65 C842 124 917 191 878 276;
-                  M880 65 C817 108 944 207 864 276;
-                  M880 65 C865 143 892 176 888 276;
-                  M880 65 C842 124 917 191 878 276"
+          values="M600 64 C520 122 680 211 600 302;
+                  M600 64 C486 112 714 224 600 302;
+                  M600 64 C554 138 646 194 600 302;
+                  M600 64 C520 122 680 211 600 302"
           dur="13s" begin="-9s" repeatCount="indefinite" />
       </path>
-      <path d="M1010 65 C972 125 1047 193 1008 270">
+      <path d="M798 64 C770 119 752 213 796 302">
         <animate attributeName="d"
-          values="M1010 65 C972 125 1047 193 1008 270;
-                  M1010 65 C946 108 1075 210 994 270;
-                  M1010 65 C995 145 1022 178 1018 270;
-                  M1010 65 C972 125 1047 193 1008 270"
+          values="M798 64 C770 119 752 213 796 302;
+                  M798 64 C748 110 730 224 808 302;
+                  M798 64 C784 132 774 202 786 302;
+                  M798 64 C770 119 752 213 796 302"
           dur="17s" begin="-12s" repeatCount="indefinite" />
       </path>
-      <path d="M1140 70 C1102 129 1168 191 1136 260">
+      <path d="M1002 64 C1012 126 992 220 1004 302">
         <animate attributeName="d"
-          values="M1140 70 C1102 129 1168 191 1136 260;
-                  M1140 70 C1078 112 1191 206 1122 260;
-                  M1140 70 C1124 147 1148 176 1146 260;
-                  M1140 70 C1102 129 1168 191 1136 260"
+          values="M1002 64 C1012 126 992 220 1004 302;
+                  M1002 64 C1026 124 978 222 1010 302;
+                  M1002 64 C998 130 1006 216 996 302;
+                  M1002 64 C1012 126 992 220 1004 302"
           dur="15s" begin="-7s" repeatCount="indefinite" />
       </path>
     </g>
   </g>
 
-  <!-- 14s particle cycle: hold 1.40s; expand 2.73s ease-out; drift 9.03s; return 0.84s ease-in. -->
-  <g class="motion-layer">
-    <circle class="particle-cyan" cx="636" cy="111" r="4">
-      <animateTransform attributeName="transform" type="translate"
-        values="242 47;242 47;0 0;30 -16;0 0;242 47" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.35;0.55;1;0.78;0.8;0.35" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="714" cy="196" r="3">
-      <animateTransform attributeName="transform" type="translate"
-        values="171 -28;171 -28;0 0;-26 19;0 0;171 -28" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.25;0.5;0.9;0.62;0.72;0.25" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="778" cy="123" r="4.5">
-      <animateTransform attributeName="transform" type="translate"
-        values="113 37;113 37;0 0;21 24;0 0;113 37" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;0.58;1;0.75;0.82;0.3" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="842" cy="215" r="3.5">
-      <animateTransform attributeName="transform" type="translate"
-        values="41 -43;41 -43;0 0;-18 -25;0 0;41 -43" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;0.52;0.95;0.7;0.78;0.3" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="902" cy="98" r="3">
-      <animateTransform attributeName="transform" type="translate"
-        values="-13 66;-13 66;0 0;16 -21;0 0;-13 66" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.22;0.48;0.86;0.6;0.7;0.22" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="958" cy="171" r="4">
-      <animateTransform attributeName="transform" type="translate"
-        values="-78 -13;-78 -13;0 0;30 -15;0 0;-78 -13" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;0.55;1;0.72;0.8;0.3" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="1014" cy="226" r="3">
-      <animateTransform attributeName="transform" type="translate"
-        values="-122 -57;-122 -57;0 0;-25 18;0 0;-122 -57" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.25;0.5;0.94;0.66;0.74;0.25" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="1062" cy="120" r="3.5">
-      <animateTransform attributeName="transform" type="translate"
-        values="-178 42;-178 42;0 0;20 23;0 0;-178 42" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.24;0.48;0.88;0.62;0.72;0.24" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="1110" cy="188" r="4">
-      <animateTransform attributeName="transform" type="translate"
-        values="-220 -17;-220 -17;0 0;-17 -24;0 0;-220 -17" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;0.55;1;0.74;0.8;0.3" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="1160" cy="92" r="2.8">
-      <animateTransform attributeName="transform" type="translate"
-        values="-278 65;-278 65;0 0;15 -20;0 0;-278 65" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.2;0.45;0.9;0.64;0.7;0.2" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="590" cy="164" r="2.8">
-      <animateTransform attributeName="transform" type="translate"
-        values="298 2;298 2;0 0;25 18;0 0;298 2" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.2;0.46;0.88;0.62;0.7;0.2" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="668" cy="232" r="3.2">
-      <animateTransform attributeName="transform" type="translate"
-        values="211 -62;211 -62;0 0;-22 -20;0 0;211 -62" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.25;0.5;0.96;0.68;0.76;0.25" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="738" cy="82" r="2.6">
-      <animateTransform attributeName="transform" type="translate"
-        values="155 77;155 77;0 0;18 26;0 0;155 77" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.2;0.44;0.84;0.58;0.68;0.2" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="812" cy="166" r="3">
-      <animateTransform attributeName="transform" type="translate"
-        values="69 -3;69 -3;0 0;-28 13;0 0;69 -3" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.25;0.5;0.92;0.64;0.74;0.25" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="872" cy="252" r="2.7">
-      <animateTransform attributeName="transform" type="translate"
-        values="15 -80;15 -80;0 0;24 -23;0 0;15 -80" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.22;0.46;0.9;0.62;0.7;0.22" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="930" cy="132" r="2.8">
-      <animateTransform attributeName="transform" type="translate"
-        values="-40 28;-40 28;0 0;-20 25;0 0;-40 28" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.22;0.46;0.86;0.6;0.68;0.22" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="986" cy="84" r="3.2">
-      <animateTransform attributeName="transform" type="translate"
-        values="-103 82;-103 82;0 0;27 16;0 0;-103 82" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.25;0.52;1;0.7;0.78;0.25" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-white" cx="1038" cy="198" r="2.6">
-      <animateTransform attributeName="transform" type="translate"
-        values="-146 -34;-146 -34;0 0;-26 -14;0 0;-146 -34" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.2;0.44;0.82;0.56;0.66;0.2" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-gold" cx="1086" cy="78" r="3">
-      <animateTransform attributeName="transform" type="translate"
-        values="-205 81;-205 81;0 0;16 27;0 0;-205 81" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.24;0.48;0.94;0.66;0.74;0.24" dur="14s" repeatCount="indefinite" />
-    </circle>
-    <circle class="particle-cyan" cx="1140" cy="238" r="3.2">
-      <animateTransform attributeName="transform" type="translate"
-        values="-251 -68;-251 -68;0 0;-23 21;0 0;-251 -68" keyTimes="0;0.1;0.295;0.62;0.94;1" calcMode="spline"
-        keySplines="0 0 1 1;0.25 1 0.5 1;0.42 0 0.58 1;0.42 0 0.58 1;0.5 0 0.75 0"
-        dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.24;0.5;0.98;0.68;0.76;0.24" dur="14s" repeatCount="indefinite" />
-    </circle>
+  <!-- One-time radial burst, then independent closed paths. Each path starts
+       and ends at the same point, so wall and glyph rebounds loop seamlessly. -->
+  <g class="motion-layer" mask="url(#text-collision-mask)">
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.18s" dur="18.7s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-120 -83 L-355 92 L-140 227 L52 86 L-90 40 L0 0" />
+      <g transform="translate(360 88)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="240 92;240 92;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.18s" fill="freeze" />
+        <circle r="4" />
+      </g>
+    </g>
+    <g class="particle particle-white">
+      <animateMotion begin="1.34s" dur="15.9s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-70 -69 L-40 10 L-170 -6 L-495 78 L-160 176 L0 0" />
+      <g transform="translate(500 74)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="100 106;100 106;0 0" keyTimes="0;0.06;1" calcMode="spline"
+          keySplines="0 0 1 1;0.14 0.78 0.22 1" dur="1.34s" fill="freeze" />
+        <circle r="3" />
+      </g>
+    </g>
+    <g class="particle particle-gold">
+      <animateMotion begin="1.26s" dur="21.1s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L95 -71 L495 50 L220 130 L42 60 L180 -2 L0 0" />
+      <g transform="translate(700 76)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-100 104;-100 104;0 0" keyTimes="0;0.09;1" calcMode="spline"
+          keySplines="0 0 1 1;0.11 0.84 0.2 1" dur="1.26s" fill="freeze" />
+        <circle r="4.5" />
+      </g>
+    </g>
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.42s" dur="19.4s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L355 -20 L170 80 L-92 64 L90 150 L240 80 L0 0" />
+      <g transform="translate(840 110)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-240 70;-240 70;0 0" keyTimes="0;0.07;1" calcMode="spline"
+          keySplines="0 0 1 1;0.13 0.8 0.2 1" dur="1.42s" fill="freeze" />
+        <circle r="3.5" />
+      </g>
+    </g>
+    <g class="particle particle-white">
+      <animateMotion begin="1.15s" dur="17.3s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L307 0 L120 -90 L-145 -12 L40 112 L250 100 L0 0" />
+      <g transform="translate(888 166)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-288 14;-288 14;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          keySplines="0 0 1 1;0.1 0.86 0.18 1" dur="1.15s" fill="freeze" />
+        <circle r="3" />
+      </g>
+    </g>
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.38s" dur="20.6s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L345 77 L160 -20 L-70 -16 L30 -160 L250 -90 L0 0" />
+      <g transform="translate(850 238)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-250 -58;-250 -58;0 0" keyTimes="0;0.06;1" calcMode="spline"
+          keySplines="0 0 1 1;0.15 0.76 0.23 1" dur="1.38s" fill="freeze" />
+        <circle r="4" />
+      </g>
+    </g>
+    <g class="particle particle-gold">
+      <animateMotion begin="1.29s" dur="16.8s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L80 35 L250 -10 L465 -70 L110 -145 L10 -32 L-80 16 L0 0" />
+      <g transform="translate(730 280)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-130 -100;-130 -100;0 0" keyTimes="0;0.1;1" calcMode="spline"
+          keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.29s" fill="freeze" />
+        <circle r="3" />
+      </g>
+    </g>
+    <g class="particle particle-white">
+      <animateMotion begin="1.47s" dur="22.3s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L40 29 L260 -5 L585 -100 L250 -170 L-15 -38 L-190 5 L0 0" />
+      <g transform="translate(610 286)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-10 -106;-10 -106;0 0" keyTimes="0;0.07;1" calcMode="spline"
+          keySplines="0 0 1 1;0.13 0.8 0.2 1" dur="1.47s" fill="freeze" />
+        <circle r="3.5" />
+      </g>
+    </g>
+    <g class="particle particle-gold">
+      <animateMotion begin="1.23s" dur="21.7s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-80 33 L-260 -10 L-495 -70 L-210 -160 L-50 -34 L90 14 L0 0" />
+      <g transform="translate(500 282)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="100 -102;100 -102;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          keySplines="0 0 1 1;0.11 0.85 0.19 1" dur="1.23s" fill="freeze" />
+        <circle r="3.2" />
+      </g>
+    </g>
+    <g class="particle particle-white">
+      <animateMotion begin="1.33s" dur="18.2s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-375 67 L-190 -50 L32 -28 L-100 -150 L-330 -80 L0 0" />
+      <g transform="translate(380 248)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="220 -68;220 -68;0 0" keyTimes="0;0.09;1" calcMode="spline"
+          keySplines="0 0 1 1;0.14 0.78 0.21 1" dur="1.33s" fill="freeze" />
+        <circle r="2.8" />
+      </g>
+    </g>
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.17s" dur="17.6s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-315 0 L-120 -105 L88 -5 L-80 100 L-260 100 L0 0" />
+      <g transform="translate(320 180)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="280 0;280 0;0 0" keyTimes="0;0.06;1" calcMode="spline"
+          keySplines="0 0 1 1;0.1 0.86 0.18 1" dur="1.17s" fill="freeze" />
+        <circle r="2.8" />
+      </g>
+    </g>
+    <g class="particle particle-gold">
+      <animateMotion begin="1.36s" dur="19.8s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-345 -30 L-150 75 L58 55 L-80 155 L-280 80 L0 0" />
+      <g transform="translate(350 120)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="250 60;250 60;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.36s" fill="freeze" />
+        <circle r="3.2" />
+      </g>
+    </g>
+    <g class="particle particle-white">
+      <animateMotion begin="1.21s" dur="14.9s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-25 -77 L0 7 L-150 -10 L-425 80 L-120 150 L0 0" />
+      <g transform="translate(430 82)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="170 98;170 98;0 0" keyTimes="0;0.1;1" calcMode="spline"
+          keySplines="0 0 1 1;0.11 0.84 0.19 1" dur="1.21s" fill="freeze" />
+        <circle r="2.6" />
+      </g>
+    </g>
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.44s" dur="18.9s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-28 20 L100 -10 L425 -60 L220 165 L40 138 L0 0" />
+      <g transform="translate(770 150)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="-170 30;-170 30;0 0" keyTimes="0;0.07;1" calcMode="spline"
+          keySplines="0 0 1 1;0.14 0.78 0.22 1" dur="1.44s" fill="freeze" />
+        <circle r="3" />
+      </g>
+    </g>
+    <g class="particle particle-gold">
+      <animateMotion begin="1.31s" dur="15.6s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L0 -7 L70 57 L180 57 L300 -40 L120 -100 L0 0" />
+      <g transform="translate(600 258)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="0 -78;0 -78;0 0" keyTimes="0;0.09;1" calcMode="spline"
+          keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.31s" fill="freeze" />
+        <circle r="2.7" />
+      </g>
+    </g>
+    <g class="particle particle-cyan">
+      <animateMotion begin="1.25s" dur="20.2s" calcMode="paced" repeatCount="indefinite"
+        path="M0 0 L-160 0 L-175 18 L-260 0 L-576 100 L-200 220 L0 0" />
+      <g transform="translate(600 68)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="0 112;0 112;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          keySplines="0 0 1 1;0.1 0.86 0.18 1" dur="1.25s" fill="freeze" />
+        <circle r="3.2" />
+      </g>
+    </g>
   </g>
 
   <!-- Typewriter sequence: PING, SCIENTIST, then the subtitle. -->
   <g class="motion-layer">
-    <text class="title-text" x="72" y="142" font-size="57" font-weight="750"
+    <text class="title-text" x="410" y="130" font-size="57" font-weight="750"
       letter-spacing="4.5" clip-path="url(#type-ping)">PING</text>
-    <text class="title-text" x="72" y="199" font-size="57" font-weight="750"
+    <text class="title-text" x="410" y="187" font-size="57" font-weight="750"
       letter-spacing="4.5" clip-path="url(#type-scientist)">SCIENTIST</text>
-    <text class="subtitle" x="72" y="258" font-size="16"
+    <text class="subtitle" x="410" y="246" font-size="16"
       letter-spacing="2.35" clip-path="url(#type-subtitle)">Physics · Scientific Computing · Web</text>
 
-    <rect class="cyan-fill" x="72" y="96" width="3" height="52">
-      <animate attributeName="x" values="72;72;224;224;72"
+    <rect class="cyan-fill" x="410" y="84" width="3" height="52">
+      <animate attributeName="x" values="410;410;562;562;410"
         keyTimes="0;0.02;0.13;0.135;1" dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0;1;1;0;0"
         keyTimes="0;0.02;0.13;0.135;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
     </rect>
-    <rect class="cyan-fill" x="72" y="153" width="3" height="52">
-      <animate attributeName="x" values="72;72;407;407;72"
+    <rect class="cyan-fill" x="410" y="141" width="3" height="52">
+      <animate attributeName="x" values="410;410;745;745;410"
         keyTimes="0;0.13;0.33;0.335;1" dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0;1;1;0;0"
         keyTimes="0;0.13;0.33;0.335;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
     </rect>
-    <rect class="cyan-fill" x="72" y="240" width="2" height="23">
-      <animate attributeName="x" values="72;72;430;430;72"
+    <rect class="cyan-fill" x="410" y="228" width="2" height="23">
+      <animate attributeName="x" values="410;410;768;768;410"
         keyTimes="0;0.33;0.52;0.94;1" dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0;1;1;0;0"
         keyTimes="0;0.33;0.52;0.94;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
@@ -316,15 +359,53 @@
         keyTimes="0;0.52;0.54;0.56;1" dur="1.2s" repeatCount="indefinite" />
     </rect>
 
-    <line class="gold-stroke" x1="74" y1="222" x2="446" y2="222" stroke-width="2">
+    <line class="gold-stroke" x1="412" y1="210" x2="770" y2="210" stroke-width="2">
       <animate attributeName="opacity" values="0;0;1;1;0"
         keyTimes="0;0.33;0.38;0.94;1" dur="14s" repeatCount="indefinite" />
     </line>
-    <rect class="gold-fill" x="453" y="217" width="10" height="10" transform="rotate(45 458 222)">
+    <rect class="gold-fill" x="777" y="205" width="10" height="10" transform="rotate(45 782 210)">
       <animate attributeName="opacity" values="0;0;1;1;0"
         keyTimes="0;0.37;0.42;0.94;1" dur="14s" repeatCount="indefinite" />
     </rect>
   </g>
 
-  <text class="quiet" x="72" y="292" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
+  <!-- Calm but complete composition for people who request reduced motion. -->
+  <g class="static-layer">
+    <g class="grid" opacity="0.58">
+      <path d="M20 86 C220 78 370 72 500 88 C552 96 578 115 600 120 C622 115 648 96 700 88 C830 72 980 78 1180 86" />
+      <path d="M20 137 C212 128 370 119 500 139 C554 149 578 169 600 176 C622 169 646 149 700 139 C830 119 988 128 1180 137" />
+      <path d="M20 190 C216 199 376 207 504 187 C558 178 580 158 600 151 C620 158 642 178 696 187 C824 207 984 199 1180 190" />
+      <path d="M20 246 C220 254 378 262 504 242 C558 233 580 213 600 206 C620 213 642 233 696 242 C822 262 980 254 1180 246" />
+      <path d="M198 64 C188 126 208 220 196 302" />
+      <path d="M402 64 C430 119 448 213 404 302" />
+      <path d="M600 64 C520 122 680 211 600 302" />
+      <path d="M798 64 C770 119 752 213 796 302" />
+      <path d="M1002 64 C1012 126 992 220 1004 302" />
+    </g>
+    <g mask="url(#text-collision-mask)" opacity="0.88">
+      <circle class="particle-cyan" cx="360" cy="88" r="4" />
+      <circle class="particle-white" cx="500" cy="74" r="3" />
+      <circle class="particle-gold" cx="700" cy="76" r="4.5" />
+      <circle class="particle-cyan" cx="840" cy="110" r="3.5" />
+      <circle class="particle-white" cx="888" cy="166" r="3" />
+      <circle class="particle-cyan" cx="850" cy="238" r="4" />
+      <circle class="particle-gold" cx="730" cy="280" r="3" />
+      <circle class="particle-white" cx="610" cy="286" r="3.5" />
+      <circle class="particle-gold" cx="500" cy="282" r="3.2" />
+      <circle class="particle-white" cx="380" cy="248" r="2.8" />
+      <circle class="particle-cyan" cx="320" cy="180" r="2.8" />
+      <circle class="particle-gold" cx="350" cy="120" r="3.2" />
+      <circle class="particle-white" cx="430" cy="82" r="2.6" />
+      <circle class="particle-cyan" cx="770" cy="150" r="3" />
+      <circle class="particle-gold" cx="600" cy="258" r="2.7" />
+      <circle class="particle-cyan" cx="600" cy="68" r="3.2" />
+    </g>
+    <text class="title-text" x="410" y="130" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
+    <text class="title-text" x="410" y="187" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
+    <line class="gold-stroke" x1="412" y1="210" x2="770" y2="210" stroke-width="2" />
+    <rect class="gold-fill" x="777" y="205" width="10" height="10" transform="rotate(45 782 210)" />
+    <text class="subtitle" x="410" y="246" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>
+  </g>
+
+  <text class="quiet" x="410" y="286" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
 </svg>
