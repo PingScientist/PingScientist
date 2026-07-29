@@ -353,9 +353,13 @@
     </rect>
   </g>
 
-  <!-- Calm but complete composition for people who request reduced motion. -->
+  <!-- Calm, low-motion composition for people who request reduced motion. -->
   <g class="static-layer">
     <g class="grid" opacity="0.58">
+      <animate attributeName="opacity" values="0.5;0.62;0.5"
+        dur="20s" repeatCount="indefinite" />
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;2 -1;0 0;-2 1;0 0" dur="26s" repeatCount="indefinite" />
       <path d="M20 86 C220 78 370 72 500 88 C552 96 578 115 600 120 C622 115 648 96 700 88 C830 72 980 78 1180 86" />
       <path d="M20 137 C212 128 370 119 500 139 C554 149 578 169 600 176 C622 169 646 149 700 139 C830 119 988 128 1180 137" />
       <path d="M20 190 C216 199 376 207 504 187 C558 178 580 158 600 151 C620 158 642 178 696 187 C824 207 984 199 1180 190" />
@@ -367,6 +371,8 @@
       <path d="M1002 64 C1012 126 992 220 1004 302" />
     </g>
     <g mask="url(#text-collision-mask)" opacity="0.88">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;1.5 -1;0 0;-1.5 1;0 0" dur="28s" repeatCount="indefinite" />
       <circle class="particle-cyan" cx="360" cy="88" r="4" />
       <circle class="particle-white" cx="500" cy="74" r="3" />
       <circle class="particle-gold" cx="700" cy="76" r="4.5" />
