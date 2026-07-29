@@ -3,23 +3,16 @@
   <desc id="desc">A centered scientific title types in while particles burst outward, rebound from the title and frame, and a warped coordinate field continuously evolves.</desc>
 
   <defs>
-    <clipPath id="type-ping">
-      <rect x="410" y="80" width="0" height="60">
-        <animate attributeName="width" values="0;0;38;76;114;152;152;0"
-          keyTimes="0;0.02;0.0475;0.075;0.1025;0.13;0.94;1"
-          calcMode="discrete" dur="14s" repeatCount="indefinite" />
-      </rect>
-    </clipPath>
-    <clipPath id="type-scientist">
-      <rect x="410" y="137" width="0" height="62">
+    <clipPath id="type-title">
+      <rect x="351" y="107" width="0" height="60">
         <animate attributeName="width"
-          values="0;0;37;74;111;148;185;222;259;296;330;330;0"
-          keyTimes="0;0.13;0.152;0.174;0.196;0.218;0.24;0.262;0.284;0.306;0.33;0.94;1"
+          values="0;0;36;73;109;146;167;202;238;273;308;344;379;415;450;486;500;500;0"
+          keyTimes="0;0.02;0.042;0.064;0.086;0.108;0.13;0.152;0.174;0.196;0.218;0.24;0.262;0.284;0.306;0.322;0.33;0.94;1"
           calcMode="discrete" dur="14s" repeatCount="indefinite" />
       </rect>
     </clipPath>
     <clipPath id="type-subtitle">
-      <rect x="410" y="226" width="0" height="28">
+      <rect x="420" y="198" width="0" height="28">
         <animate attributeName="width" values="0;0;354;354;0"
           keyTimes="0;0.33;0.52;0.94;1" dur="14s" repeatCount="indefinite" />
       </rect>
@@ -31,14 +24,13 @@
       maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
       <rect width="1200" height="320" fill="#fff" />
       <g fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round">
-        <text x="410" y="130" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
-        <text x="410" y="187" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
-        <text x="410" y="246" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>
-        <text x="410" y="286" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
+        <text x="351" y="157" font-size="57" font-weight="750" letter-spacing="4.5">PING SCIENTIST</text>
+        <text x="600" y="218" font-size="16" letter-spacing="2.35" text-anchor="middle">Physics · Scientific Computing · Web</text>
+        <text x="600" y="258" font-size="11" letter-spacing="2" text-anchor="middle">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
       </g>
-      <line x1="412" y1="210" x2="770" y2="210" stroke="#000" stroke-width="9" />
-      <rect x="774" y="202" width="16" height="16" rx="2" fill="#000"
-        transform="rotate(45 782 210)" />
+      <line x1="347" y1="181" x2="839" y2="181" stroke="#000" stroke-width="9" />
+      <rect x="839" y="173" width="16" height="16" rx="2" fill="#000"
+        transform="rotate(45 847 181)" />
     </mask>
   </defs>
 
@@ -169,7 +161,7 @@
   <g class="motion-layer" mask="url(#text-collision-mask)">
     <g class="particle particle-cyan">
       <animateMotion begin="1.18s" dur="18.7s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-120 -83 L-355 92 L-140 227 L52 86 L-90 40 L0 0" />
+        path="M0 0 L-120 -83 L-355 92 L-140 227 L-20 58 L-90 40 L0 0" />
       <g transform="translate(360 88)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="240 92;240 92;0 0" keyTimes="0;0.08;1" calcMode="spline"
@@ -179,7 +171,7 @@
     </g>
     <g class="particle particle-white">
       <animateMotion begin="1.34s" dur="15.9s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-70 -69 L-40 10 L-170 -6 L-495 78 L-160 176 L0 0" />
+        path="M0 0 L-70 -69 L-40 32 L-170 -6 L-495 78 L-160 176 L0 0" />
       <g transform="translate(500 74)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="100 106;100 106;0 0" keyTimes="0;0.06;1" calcMode="spline"
@@ -189,7 +181,7 @@
     </g>
     <g class="particle particle-gold">
       <animateMotion begin="1.26s" dur="21.1s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L95 -71 L495 50 L220 130 L42 60 L180 -2 L0 0" />
+        path="M0 0 L95 -71 L495 50 L220 130 L42 27 L180 -2 L0 0" />
       <g transform="translate(700 76)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="-100 104;-100 104;0 0" keyTimes="0;0.09;1" calcMode="spline"
@@ -200,16 +192,16 @@
     <g class="particle particle-cyan">
       <animateMotion begin="1.42s" dur="19.4s" calcMode="paced" repeatCount="indefinite"
         path="M0 0 L355 -20 L170 80 L-92 64 L90 150 L240 80 L0 0" />
-      <g transform="translate(840 110)">
+      <g transform="translate(840 100)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
-          values="-240 70;-240 70;0 0" keyTimes="0;0.07;1" calcMode="spline"
+          values="-240 80;-240 80;0 0" keyTimes="0;0.07;1" calcMode="spline"
           keySplines="0 0 1 1;0.13 0.8 0.2 1" dur="1.42s" fill="freeze" />
         <circle r="3.5" />
       </g>
     </g>
     <g class="particle particle-white">
       <animateMotion begin="1.15s" dur="17.3s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L307 0 L120 -90 L-145 -12 L40 112 L250 100 L0 0" />
+        path="M0 0 L307 0 L120 -90 L-25 -16 L40 112 L250 100 L0 0" />
       <g transform="translate(888 166)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="-288 14;-288 14;0 0" keyTimes="0;0.08;1" calcMode="spline"
@@ -269,7 +261,7 @@
     </g>
     <g class="particle particle-cyan">
       <animateMotion begin="1.17s" dur="17.6s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-315 0 L-120 -105 L88 -5 L-80 100 L-260 100 L0 0" />
+        path="M0 0 L-315 0 L-120 -105 L18 -32 L-80 100 L-260 100 L0 0" />
       <g transform="translate(320 180)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="280 0;280 0;0 0" keyTimes="0;0.06;1" calcMode="spline"
@@ -279,17 +271,17 @@
     </g>
     <g class="particle particle-gold">
       <animateMotion begin="1.36s" dur="19.8s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-345 -30 L-150 75 L58 55 L-80 155 L-280 80 L0 0" />
-      <g transform="translate(350 120)">
+        path="M0 0 L-305 -30 L-150 75 L28 25 L-80 155 L-280 80 L0 0" />
+      <g transform="translate(310 120)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
-          values="250 60;250 60;0 0" keyTimes="0;0.08;1" calcMode="spline"
+          values="290 60;290 60;0 0" keyTimes="0;0.08;1" calcMode="spline"
           keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.36s" fill="freeze" />
         <circle r="3.2" />
       </g>
     </g>
     <g class="particle particle-white">
       <animateMotion begin="1.21s" dur="14.9s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-25 -77 L0 7 L-150 -10 L-425 80 L-120 150 L0 0" />
+        path="M0 0 L-25 -77 L0 24 L-150 -10 L-425 80 L-120 150 L0 0" />
       <g transform="translate(430 82)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
           values="170 98;170 98;0 0" keyTimes="0;0.1;1" calcMode="spline"
@@ -299,20 +291,20 @@
     </g>
     <g class="particle particle-cyan">
       <animateMotion begin="1.44s" dur="18.9s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L-28 20 L100 -10 L425 -60 L220 165 L40 138 L0 0" />
-      <g transform="translate(770 150)">
+        path="M0 0 L-28 0 L100 -10 L305 -60 L220 165 L40 138 L0 0" />
+      <g transform="translate(890 150)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
-          values="-170 30;-170 30;0 0" keyTimes="0;0.07;1" calcMode="spline"
+          values="-290 30;-290 30;0 0" keyTimes="0;0.07;1" calcMode="spline"
           keySplines="0 0 1 1;0.14 0.78 0.22 1" dur="1.44s" fill="freeze" />
         <circle r="3" />
       </g>
     </g>
     <g class="particle particle-gold">
       <animateMotion begin="1.31s" dur="15.6s" calcMode="paced" repeatCount="indefinite"
-        path="M0 0 L0 -7 L70 57 L180 57 L300 -40 L120 -100 L0 0" />
-      <g transform="translate(600 258)">
+        path="M0 0 L0 -12 L70 39 L180 39 L300 -40 L120 -100 L0 0" />
+      <g transform="translate(600 276)">
         <animateTransform attributeName="transform" type="translate" additive="sum"
-          values="0 -78;0 -78;0 0" keyTimes="0;0.09;1" calcMode="spline"
+          values="0 -96;0 -96;0 0" keyTimes="0;0.09;1" calcMode="spline"
           keySplines="0 0 1 1;0.12 0.82 0.2 1" dur="1.31s" fill="freeze" />
         <circle r="2.7" />
       </g>
@@ -329,29 +321,21 @@
     </g>
   </g>
 
-  <!-- Typewriter sequence: PING, SCIENTIST, then the subtitle. -->
+  <!-- Typewriter sequence: the single-line title, then the subtitle. -->
   <g class="motion-layer">
-    <text class="title-text" x="410" y="130" font-size="57" font-weight="750"
-      letter-spacing="4.5" clip-path="url(#type-ping)">PING</text>
-    <text class="title-text" x="410" y="187" font-size="57" font-weight="750"
-      letter-spacing="4.5" clip-path="url(#type-scientist)">SCIENTIST</text>
-    <text class="subtitle" x="410" y="246" font-size="16"
+    <text class="title-text" x="351" y="157" font-size="57" font-weight="750"
+      letter-spacing="4.5" clip-path="url(#type-title)">PING SCIENTIST</text>
+    <text class="subtitle" x="600" y="218" font-size="16" text-anchor="middle"
       letter-spacing="2.35" clip-path="url(#type-subtitle)">Physics · Scientific Computing · Web</text>
 
-    <rect class="cyan-fill" x="410" y="84" width="3" height="52">
-      <animate attributeName="x" values="410;410;562;562;410"
-        keyTimes="0;0.02;0.13;0.135;1" dur="14s" repeatCount="indefinite" />
+    <rect class="cyan-fill" x="351" y="111" width="3" height="52">
+      <animate attributeName="x" values="351;351;851;851;351"
+        keyTimes="0;0.02;0.33;0.335;1" dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0;1;1;0;0"
-        keyTimes="0;0.02;0.13;0.135;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
+        keyTimes="0;0.02;0.33;0.335;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
     </rect>
-    <rect class="cyan-fill" x="410" y="141" width="3" height="52">
-      <animate attributeName="x" values="410;410;745;745;410"
-        keyTimes="0;0.13;0.33;0.335;1" dur="14s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0;1;1;0;0"
-        keyTimes="0;0.13;0.33;0.335;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
-    </rect>
-    <rect class="cyan-fill" x="410" y="228" width="2" height="23">
-      <animate attributeName="x" values="410;410;768;768;410"
+    <rect class="cyan-fill" x="420" y="200" width="2" height="23">
+      <animate attributeName="x" values="420;420;780;780;420"
         keyTimes="0;0.33;0.52;0.94;1" dur="14s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0;1;1;0;0"
         keyTimes="0;0.33;0.52;0.94;1" calcMode="discrete" dur="14s" repeatCount="indefinite" />
@@ -359,11 +343,11 @@
         keyTimes="0;0.52;0.54;0.56;1" dur="1.2s" repeatCount="indefinite" />
     </rect>
 
-    <line class="gold-stroke" x1="412" y1="210" x2="770" y2="210" stroke-width="2">
+    <line class="gold-stroke" x1="347" y1="181" x2="839" y2="181" stroke-width="2">
       <animate attributeName="opacity" values="0;0;1;1;0"
         keyTimes="0;0.33;0.38;0.94;1" dur="14s" repeatCount="indefinite" />
     </line>
-    <rect class="gold-fill" x="777" y="205" width="10" height="10" transform="rotate(45 782 210)">
+    <rect class="gold-fill" x="842" y="176" width="10" height="10" transform="rotate(45 847 181)">
       <animate attributeName="opacity" values="0;0;1;1;0"
         keyTimes="0;0.37;0.42;0.94;1" dur="14s" repeatCount="indefinite" />
     </rect>
@@ -386,7 +370,7 @@
       <circle class="particle-cyan" cx="360" cy="88" r="4" />
       <circle class="particle-white" cx="500" cy="74" r="3" />
       <circle class="particle-gold" cx="700" cy="76" r="4.5" />
-      <circle class="particle-cyan" cx="840" cy="110" r="3.5" />
+      <circle class="particle-cyan" cx="840" cy="100" r="3.5" />
       <circle class="particle-white" cx="888" cy="166" r="3" />
       <circle class="particle-cyan" cx="850" cy="238" r="4" />
       <circle class="particle-gold" cx="730" cy="280" r="3" />
@@ -394,18 +378,17 @@
       <circle class="particle-gold" cx="500" cy="282" r="3.2" />
       <circle class="particle-white" cx="380" cy="248" r="2.8" />
       <circle class="particle-cyan" cx="320" cy="180" r="2.8" />
-      <circle class="particle-gold" cx="350" cy="120" r="3.2" />
+      <circle class="particle-gold" cx="310" cy="120" r="3.2" />
       <circle class="particle-white" cx="430" cy="82" r="2.6" />
-      <circle class="particle-cyan" cx="770" cy="150" r="3" />
-      <circle class="particle-gold" cx="600" cy="258" r="2.7" />
+      <circle class="particle-cyan" cx="890" cy="150" r="3" />
+      <circle class="particle-gold" cx="600" cy="276" r="2.7" />
       <circle class="particle-cyan" cx="600" cy="68" r="3.2" />
     </g>
-    <text class="title-text" x="410" y="130" font-size="57" font-weight="750" letter-spacing="4.5">PING</text>
-    <text class="title-text" x="410" y="187" font-size="57" font-weight="750" letter-spacing="4.5">SCIENTIST</text>
-    <line class="gold-stroke" x1="412" y1="210" x2="770" y2="210" stroke-width="2" />
-    <rect class="gold-fill" x="777" y="205" width="10" height="10" transform="rotate(45 782 210)" />
-    <text class="subtitle" x="410" y="246" font-size="16" letter-spacing="2.35">Physics · Scientific Computing · Web</text>
+    <text class="title-text" x="351" y="157" font-size="57" font-weight="750" letter-spacing="4.5">PING SCIENTIST</text>
+    <line class="gold-stroke" x1="347" y1="181" x2="839" y2="181" stroke-width="2" />
+    <rect class="gold-fill" x="842" y="176" width="10" height="10" transform="rotate(45 847 181)" />
+    <text class="subtitle" x="600" y="218" font-size="16" letter-spacing="2.35" text-anchor="middle">Physics · Scientific Computing · Web</text>
   </g>
 
-  <text class="quiet" x="410" y="286" font-size="11" letter-spacing="2">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
+  <text class="quiet" x="600" y="258" font-size="11" letter-spacing="2" text-anchor="middle">NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</text>
 </svg>
