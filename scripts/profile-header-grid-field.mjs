@@ -13,8 +13,12 @@ export const OVERSCAN_X = 120;
 export const OVERSCAN_Y = 96;
 export const DIVIDER_Y = 55;
 
-const FIELD_SIGMA_X = 310;
-const FIELD_SIGMA_Y = 128;
+const BROAD_SIGMA_X = 570;
+const BROAD_SIGMA_Y = 210;
+const CENTRAL_SIGMA_X = 245;
+const CENTRAL_SIGMA_Y = 142;
+const CENTRAL_QUARTIC_WEIGHT = 0.08;
+const BROAD_PHASE_SPREAD = 0.34;
 const VERTICAL_STARTUP_DISTANCE = 56;
 const VERTICAL_ENVELOPE_SCALE = 72;
 const SOURCE_KEYFRAME_COUNT = 21;
@@ -28,11 +32,13 @@ export function fieldState(timeSeconds) {
   return {
     centerX: 600 + 78 * Math.sin(phase - 0.35),
     centerY: 160 + 22 * Math.sin(phase + 0.85),
-    horizontalStrength:
-      34 * Math.cos(phase + 0.48) + 9 * Math.sin(phase * 2 - 0.2),
-    verticalStrength:
-      47 * Math.sin(phase - 0.22) + 8 * Math.sin(phase * 2 + 0.55),
-    shearStrength: 9 * Math.cos(phase - 0.7),
+    centralHorizontalStrength:
+      8.6 * Math.cos(phase + 0.48) +
+      2.05 * Math.sin(phase * 2 - 0.2),
+    centralVerticalStrength:
+      12.4 * Math.sin(phase - 0.22) +
+      2.5 * Math.sin(phase * 2 + 0.55),
+    centralShearStrength: 3.4 * Math.cos(phase - 0.7),
     phase,
   };
 }
@@ -51,30 +57,61 @@ export function verticalBelowDividerEnvelope(y) {
 
 export function warpPoint(x, y, timeSeconds) {
   const state = fieldState(timeSeconds);
-  const normalizedX = (x - state.centerX) / FIELD_SIGMA_X;
-  const normalizedY = (y - state.centerY) / FIELD_SIGMA_Y;
-  const radiusSquared =
-    normalizedX * normalizedX + normalizedY * normalizedY;
-  // The quadratic term keeps the well broad. The quartic tail makes the
-  // displacement and its derivatives approach zero before the viewport sides
-  // without a clamp, mask, or fixed-radius cutoff.
-  const horizontalEnvelope = Math.exp(
-    -0.5 * (radiusSquared + 0.55 * radiusSquared * radiusSquared),
+  const broadX = (x - state.centerX) / BROAD_SIGMA_X;
+  const broadY = (y - state.centerY) / BROAD_SIGMA_Y;
+  const broadRadiusSquared = broadX * broadX + 0.42 * broadY * broadY;
+  const broadEnvelope = Math.exp(-0.5 * broadRadiusSquared);
+  const broadPhase = state.phase - BROAD_PHASE_SPREAD * broadX;
+  const broadHorizontalStrength =
+    3.2 * Math.cos(broadPhase + 0.48) +
+    Math.sin(broadPhase * 2 - 0.2);
+  const broadVerticalStrength =
+    5.8 * Math.sin(broadPhase - 0.22) +
+    1.3 * Math.sin(broadPhase * 2 + 0.55);
+  const broadShearStrength = 1.8 * Math.cos(broadPhase - 0.7);
+  const broadDisplacement = {
+    x:
+      broadEnvelope *
+      (broadHorizontalStrength - broadShearStrength * 0.45 * broadY),
+    y:
+      broadEnvelope *
+      (broadVerticalStrength + broadShearStrength * 0.62 * broadX),
+  };
+
+  const centralX = (x - state.centerX) / CENTRAL_SIGMA_X;
+  const centralY = (y - state.centerY) / CENTRAL_SIGMA_Y;
+  const centralRadiusSquared =
+    centralX * centralX + centralY * centralY;
+  // The central well keeps the title-area curvature, while its light quartic
+  // tail blends into the broad field instead of collapsing outside the core.
+  const centralEnvelope = Math.exp(
+    -0.5 *
+      (centralRadiusSquared +
+        CENTRAL_QUARTIC_WEIGHT *
+          centralRadiusSquared *
+          centralRadiusSquared),
   );
-  const smoothEnvelope =
-    horizontalEnvelope * verticalBelowDividerEnvelope(y);
+  const centralDisplacement = {
+    x:
+      centralEnvelope *
+      (state.centralHorizontalStrength -
+        state.centralShearStrength * 0.72 * centralY),
+    y:
+      centralEnvelope *
+      (state.centralVerticalStrength +
+        state.centralShearStrength * 0.92 * centralX),
+  };
+  const verticalEnvelope = verticalBelowDividerEnvelope(y);
 
   return {
     x:
       x +
-      smoothEnvelope *
-        (state.horizontalStrength -
-          state.shearStrength * 0.82 * normalizedY),
+      verticalEnvelope *
+        (broadDisplacement.x + centralDisplacement.x),
     y:
       y +
-      smoothEnvelope *
-        (state.verticalStrength +
-          state.shearStrength * 1.18 * normalizedX),
+      verticalEnvelope *
+        (broadDisplacement.y + centralDisplacement.y),
   };
 }
 
@@ -244,6 +281,8 @@ export function validateTimeline() {
   let maximumDividerSlopeChange = 0;
   let minimumVerticalDerivative = Number.POSITIVE_INFINITY;
   let minimumHorizontalDistanceBelowDivider = Number.POSITIVE_INFINITY;
+  let maximumAdjacentFrameDisplacement = 0;
+  let maximumFrameAcceleration = 0;
 
   for (let frame = 0; frame < FRAME_COUNT; frame += 1) {
     const time = frame / FRAME_RATE;
@@ -374,6 +413,28 @@ export function validateTimeline() {
         const point = warpPoint(x, y, time);
         const displacement = Math.hypot(point.x - x, point.y - y);
         maximumDisplacement = Math.max(maximumDisplacement, displacement);
+        const previousFrame = warpPoint(
+          x,
+          y,
+          time - 1 / FRAME_RATE,
+        );
+        const nextFrame = warpPoint(x, y, time + 1 / FRAME_RATE);
+        maximumAdjacentFrameDisplacement = Math.max(
+          maximumAdjacentFrameDisplacement,
+          Math.hypot(
+            nextFrame.x - point.x,
+            nextFrame.y - point.y,
+          ),
+        );
+        maximumFrameAcceleration = Math.max(
+          maximumFrameAcceleration,
+          Math.hypot(
+            nextFrame.x - 2 * point.x + previousFrame.x,
+            nextFrame.y - 2 * point.y + previousFrame.y,
+          ) *
+            FRAME_RATE *
+            FRAME_RATE,
+        );
         if (x === 0 || x === WIDTH) {
           maximumSideEdgeDisplacement = Math.max(
             maximumSideEdgeDisplacement,
@@ -504,10 +565,14 @@ export function validateTimeline() {
     maximumDividerSlopeChange,
     minimumVerticalDerivative,
     minimumHorizontalDistanceBelowDivider,
+    maximumAdjacentFrameDisplacement,
+    maximumFrameAcceleration,
     centerDriftX: 78,
     centerDriftY: 22,
-    influenceWidth: FIELD_SIGMA_X * 2,
-    influenceHeight: FIELD_SIGMA_Y * 2,
+    broadInfluenceWidth: BROAD_SIGMA_X * 2,
+    broadInfluenceHeight: BROAD_SIGMA_Y * 2,
+    centralInfluenceWidth: CENTRAL_SIGMA_X * 2,
+    centralInfluenceHeight: CENTRAL_SIGMA_Y * 2,
     overscanX: OVERSCAN_X,
     overscanY: OVERSCAN_Y,
     maximumClosurePositionError: Math.max(...closureSamples),
@@ -527,6 +592,8 @@ export function validateTimeline() {
     maximumDividerDeformation > 1e-12 ||
     maximumDividerFirstDerivativeError >= 1e-4 ||
     maximumDividerSlopeChange >= 1e-3 ||
+    maximumAdjacentFrameDisplacement >= 1 ||
+    maximumFrameAcceleration >= 5 ||
     maximumTransitionSlopeDelta >= 0.08 ||
     maximumTransitionCurvatureDelta >= 0.004 ||
     minimumHorizontalEndpointOverscan < 80 ||
