@@ -11,9 +11,12 @@ export const HORIZONTAL_BASELINES = [78, 123, 168, 213, 258];
 export const VERTICAL_BASELINES = [120, 280, 440, 600, 760, 920, 1080];
 export const OVERSCAN_X = 120;
 export const OVERSCAN_Y = 96;
+export const DIVIDER_Y = 55;
 
 const FIELD_SIGMA_X = 310;
 const FIELD_SIGMA_Y = 128;
+const VERTICAL_STARTUP_DISTANCE = 56;
+const VERTICAL_ENVELOPE_SCALE = 72;
 const SOURCE_KEYFRAME_COUNT = 21;
 
 function phaseAt(timeSeconds) {
@@ -34,6 +37,18 @@ export function fieldState(timeSeconds) {
   };
 }
 
+export function verticalBelowDividerEnvelope(y) {
+  if (y <= DIVIDER_Y) {
+    return 0;
+  }
+
+  // A cubic exponential onset is exactly flat through the divider (C2), then
+  // grows gently through the first 56 px before approaching full strength.
+  // Unlike a finite-radius clamp, it has no second spatial seam below.
+  const normalizedDistance = (y - DIVIDER_Y) / VERTICAL_ENVELOPE_SCALE;
+  return 1 - Math.exp(-(normalizedDistance ** 3));
+}
+
 export function warpPoint(x, y, timeSeconds) {
   const state = fieldState(timeSeconds);
   const normalizedX = (x - state.centerX) / FIELD_SIGMA_X;
@@ -43,9 +58,11 @@ export function warpPoint(x, y, timeSeconds) {
   // The quadratic term keeps the well broad. The quartic tail makes the
   // displacement and its derivatives approach zero before the viewport sides
   // without a clamp, mask, or fixed-radius cutoff.
-  const smoothEnvelope = Math.exp(
+  const horizontalEnvelope = Math.exp(
     -0.5 * (radiusSquared + 0.55 * radiusSquared * radiusSquared),
   );
+  const smoothEnvelope =
+    horizontalEnvelope * verticalBelowDividerEnvelope(y);
 
   return {
     x:
@@ -221,6 +238,12 @@ export function validateTimeline() {
   let maximumVisibleTopBottomSlope = 0;
   let minimumHorizontalEndpointOverscan = Number.POSITIVE_INFINITY;
   let minimumVerticalEndpointOverscan = Number.POSITIVE_INFINITY;
+  let maximumAboveDividerDeformation = 0;
+  let maximumDividerDeformation = 0;
+  let maximumDividerFirstDerivativeError = 0;
+  let maximumDividerSlopeChange = 0;
+  let minimumVerticalDerivative = Number.POSITIVE_INFINITY;
+  let minimumHorizontalDistanceBelowDivider = Number.POSITIVE_INFINITY;
 
   for (let frame = 0; frame < FRAME_COUNT; frame += 1) {
     const time = frame / FRAME_RATE;
@@ -297,6 +320,12 @@ export function validateTimeline() {
         -line[0].x,
         line[line.length - 1].x - WIDTH,
       );
+      for (const point of line) {
+        minimumHorizontalDistanceBelowDivider = Math.min(
+          minimumHorizontalDistanceBelowDivider,
+          point.y - DIVIDER_Y,
+        );
+      }
     }
     for (const line of verticalLines) {
       for (let index = 1; index < line.length; index += 1) {
@@ -361,11 +390,51 @@ export function validateTimeline() {
         const dyDx = (right.y - left.y) / (2 * epsilon);
         const dxDy = (down.x - up.x) / (2 * epsilon);
         const dyDy = (down.y - up.y) / (2 * epsilon);
+        minimumVerticalDerivative = Math.min(minimumVerticalDerivative, dyDy);
         minimumJacobian = Math.min(
           minimumJacobian,
           dxDx * dyDy - dxDy * dyDx,
         );
       }
+    }
+
+    for (let y = -OVERSCAN_Y; y <= DIVIDER_Y; y += 1) {
+      for (let x = -OVERSCAN_X; x <= WIDTH + OVERSCAN_X; x += 16) {
+        const point = warpPoint(x, y, time);
+        maximumAboveDividerDeformation = Math.max(
+          maximumAboveDividerDeformation,
+          Math.hypot(point.x - x, point.y - y),
+        );
+      }
+    }
+
+    for (let x = -OVERSCAN_X; x <= WIDTH + OVERSCAN_X; x += 8) {
+      const dividerPoint = warpPoint(x, DIVIDER_Y, time);
+      maximumDividerDeformation = Math.max(
+        maximumDividerDeformation,
+        Math.hypot(dividerPoint.x - x, dividerPoint.y - DIVIDER_Y),
+      );
+
+      const epsilon = 0.25;
+      const above = warpPoint(x, DIVIDER_Y - epsilon, time);
+      const below = warpPoint(x, DIVIDER_Y + epsilon, time);
+      const derivative = {
+        x: (below.x - above.x) / (2 * epsilon),
+        y: (below.y - above.y) / (2 * epsilon),
+      };
+      maximumDividerFirstDerivativeError = Math.max(
+        maximumDividerFirstDerivativeError,
+        Math.hypot(derivative.x, derivative.y - 1),
+      );
+
+      const lower1 = warpPoint(x, DIVIDER_Y + 1, time);
+      const lower2 = warpPoint(x, DIVIDER_Y + 2, time);
+      const firstSlope = lower1.x - dividerPoint.x;
+      const secondSlope = lower2.x - lower1.x;
+      maximumDividerSlopeChange = Math.max(
+        maximumDividerSlopeChange,
+        Math.abs(secondSlope - firstSlope),
+      );
     }
   }
 
@@ -426,6 +495,15 @@ export function validateTimeline() {
     minimumVerticalEndpointOverscan,
     maximumDisplacement,
     maximumSideEdgeDisplacement,
+    dividerY: DIVIDER_Y,
+    verticalStartupDistance: VERTICAL_STARTUP_DISTANCE,
+    verticalEnvelopeScale: VERTICAL_ENVELOPE_SCALE,
+    maximumAboveDividerDeformation,
+    maximumDividerDeformation,
+    maximumDividerFirstDerivativeError,
+    maximumDividerSlopeChange,
+    minimumVerticalDerivative,
+    minimumHorizontalDistanceBelowDivider,
     centerDriftX: 78,
     centerDriftY: 22,
     influenceWidth: FIELD_SIGMA_X * 2,
@@ -443,6 +521,12 @@ export function validateTimeline() {
     minimumVerticalGap <= 0 ||
     minimumHorizontalStep <= 0 ||
     minimumVerticalStep <= 0 ||
+    minimumVerticalDerivative <= 0 ||
+    minimumHorizontalDistanceBelowDivider <= 0 ||
+    maximumAboveDividerDeformation > 1e-12 ||
+    maximumDividerDeformation > 1e-12 ||
+    maximumDividerFirstDerivativeError >= 1e-4 ||
+    maximumDividerSlopeChange >= 1e-3 ||
     maximumTransitionSlopeDelta >= 0.08 ||
     maximumTransitionCurvatureDelta >= 0.004 ||
     minimumHorizontalEndpointOverscan < 80 ||
@@ -485,7 +569,8 @@ function motionGridMarkup() {
   return `  <!-- Shared periodic deformation field. Every grid line is sampled from
        the same smooth analytic field; no per-line phase, skew, or independent morph. -->
   <g class="motion-layer">
-    <g class="grid" opacity="0.68" data-grid-field="continuous">
+    <g class="grid" opacity="0.68" data-grid-field="continuous"
+      clip-path="url(#grid-below-divider)">
       <animate attributeName="opacity" values="0.58;0.76;0.66;0.74;0.58"
         keyTimes="0;0.25;0.5;0.75;1" dur="${DURATION_SECONDS}s"
         calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
@@ -500,7 +585,8 @@ ${vertical}
 
 function staticGridMarkup() {
   const paths = gridPathsAt(0);
-  return `    <g class="grid" opacity="0.58" data-grid-field="static">
+  return `    <g class="grid" opacity="0.58" data-grid-field="static"
+      clip-path="url(#grid-below-divider)">
 ${[...paths.horizontal, ...paths.vertical]
   .map((d) => `      <path d="${d}" />`)
   .join("\n")}
@@ -509,6 +595,22 @@ ${[...paths.horizontal, ...paths.vertical]
 
 async function updateSvgSource(svgPath) {
   let svg = await fs.readFile(svgPath, "utf8");
+  const clipMarkup = `    <clipPath id="grid-below-divider">
+      <rect x="${-OVERSCAN_X}" y="${DIVIDER_Y}" width="${WIDTH + OVERSCAN_X * 2}" height="${HEIGHT - DIVIDER_Y + OVERSCAN_Y}" />
+    </clipPath>`;
+  svg = svg.replace(
+    /\s*<clipPath id="grid-below-divider">[\s\S]*?<\/clipPath>/,
+    "",
+  );
+  svg = svg.replace("  </defs>", `${clipMarkup}\n  </defs>`);
+  svg = svg.replace(
+    /\n\s*<line class="divider" x1="28" y1="55" x2="1172" y2="55" \/>/g,
+    "",
+  );
+  svg = svg.replace(
+    /\n\s*<!-- Fixed foreground boundary between the profile label and warp field\. -->/g,
+    "",
+  );
   const originalMotionStart = svg.indexOf("  <!-- The full field evolves");
   const generatedMotionStart = svg.indexOf(
     "  <!-- Shared periodic deformation field",
@@ -534,6 +636,11 @@ async function updateSvgSource(svgPath) {
     svg.slice(0, staticGridStart) +
     staticGridMarkup() +
     svg.slice(staticGridEnd + "    </g>".length);
+
+  svg = svg.replace(
+    "\n</svg>",
+    `\n  <!-- Fixed foreground boundary between the profile label and warp field. -->\n  <line class="divider" x1="28" y1="${DIVIDER_Y}" x2="1172" y2="${DIVIDER_Y}" />\n</svg>`,
+  );
 
   await fs.writeFile(svgPath, svg);
 }
