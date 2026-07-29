@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-header-dark.svg?v=animated-header-2">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-header-light.svg?v=animated-header-2">
-    <img src="./assets/profile-header-dark.svg?v=animated-header-2" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-header-dark-animated.gif">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-header-light-animated.gif">
+    <img src="./assets/profile-header-dark-animated.gif" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web">
   </picture>
 </p>
 
