@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="172" height="32" viewBox="0 0 172 32" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="32" viewBox="0 0 184 32" role="img" aria-labelledby="title">
   <title id="title">Scientific Computing</title>
-  <g transform="translate(0 2)">
-  <rect x=".5" y=".5" width="171" height="27" rx="13.5" fill="#181b36" stroke="#4f4d87"/>
-  <g fill="none" stroke="#aaa3ff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="9" y="8" width="12" height="12" rx="2"/>
-    <path d="M12 5.8v2.1M16 5.8v2.1M20 5.8v2.1M12 20.1v2.1M16 20.1v2.1M20 20.1v2.1M6.8 11h2.1M6.8 15h2.1M6.8 19h2.1M21.1 11h2.1M21.1 15h2.1M21.1 19h2.1"/>
-    <path d="m12.2 16.9 2.2-5.8h1.4l-2.2 5.8M17.2 12.2h1.7"/>
+  <rect x="0.5" y="0.5" width="183" height="31" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
+  <g transform="translate(11 8)">
+    <g fill="none" stroke="#42d6c5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4.4" y="4.4" width="7.2" height="7.2" rx="1.2" />
+      <path d="M6.6 1.9v2.5M9.4 1.9v2.5M6.6 11.6v2.5M9.4 11.6v2.5M1.9 6.6h2.5M1.9 9.4h2.5M11.6 6.6h2.5M11.6 9.4h2.5" />
+    </g>
   </g>
-  <text x="30" y="18" fill="#eceaff" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10.5" font-weight="600" letter-spacing=".15">Scientific Computing</text>
-  </g>
+  <text x="35" y="20.5" fill="#e6edf3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0.2">Scientific Computing</text>
 </svg>

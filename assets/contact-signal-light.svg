@@ -4,15 +4,15 @@
 
   <style>
     text {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
-    .frame { fill: #edf2f3; stroke: #b8cbd2; }
-    .label { fill: #152b37; }
-    .meta { fill: #526d79; }
-    .divider { stroke: #cfdbdf; }
+    .frame { fill: #f6f8fa; stroke: #d0d7de; }
+    .label { fill: #1f2328; }
+    .meta { fill: #636c76; }
+    .divider { stroke: #d0d7de; }
     .track {
       fill: none;
-      stroke: #abc0c8;
+      stroke: #d0d7de;
       stroke-width: 1.4;
     }
     .signal-left,
@@ -22,13 +22,13 @@
       stroke-linecap: round;
       stroke-dasharray: 10 14;
     }
-    .signal-left { stroke: #087f79; }
+    .signal-left { stroke: #0f766e; }
     .signal-right { stroke: #8a6a20; }
     .motion-layer { display: inline; }
 
   </style>
 
-  <rect class="frame" x="1" y="1" width="1198" height="102" rx="5" />
+  <rect class="frame" x="1" y="1" width="1198" height="102" rx="6" />
   <line class="divider" x1="28" y1="18" x2="1172" y2="18" />
   <line class="divider" x1="28" y1="86" x2="1172" y2="86" />
 
@@ -54,10 +54,10 @@
         dur="7.5s" repeatCount="indefinite" />
     </path>
 
-    <circle cx="252" cy="52" r="4" fill="#087f79">
+    <circle cx="252" cy="52" r="4" fill="#0f766e">
       <animate attributeName="opacity" values="0.65;1;0.65" dur="3.4s" repeatCount="indefinite" />
     </circle>
-    <circle cx="492" cy="52" r="4" fill="#087f79">
+    <circle cx="492" cy="52" r="4" fill="#0f766e">
       <animate attributeName="opacity" values="0.45;1;0.45" dur="3s" begin="-1.2s" repeatCount="indefinite" />
     </circle>
     <circle cx="708" cy="52" r="4" fill="#8a6a20">
