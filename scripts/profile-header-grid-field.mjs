@@ -1,5 +1,3 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const WIDTH = 1200;
@@ -605,134 +603,13 @@ export function validateTimeline() {
   return report;
 }
 
-function sourceTimes() {
-  return Array.from(
-    { length: SOURCE_KEYFRAME_COUNT },
-    (_, index) => index,
-  );
-}
-
-function animatedPathMarkup(kind, baseline, index) {
-  const values = sourceTimes()
-    .map((time) =>
-      pointsToBSplinePath(sampleLine(kind, baseline, time)),
-    )
-    .join(";\n          ");
-  const initial = pointsToBSplinePath(sampleLine(kind, baseline, 0));
-  return `      <path data-grid-kind="${kind}" data-grid-index="${index}" d="${initial}">
-        <animate attributeName="d" values="${values}"
-          dur="${DURATION_SECONDS}s" calcMode="linear" repeatCount="indefinite" />
-      </path>`;
-}
-
-function motionGridMarkup() {
-  const horizontal = HORIZONTAL_BASELINES.map((baseline, index) =>
-    animatedPathMarkup("horizontal", baseline, index),
-  ).join("\n");
-  const vertical = VERTICAL_BASELINES.map((baseline, index) =>
-    animatedPathMarkup("vertical", baseline, index),
-  ).join("\n");
-
-  return `  <!-- Shared periodic deformation field. Every grid line is sampled from
-       the same smooth analytic field; no per-line phase, skew, or independent morph. -->
-  <g class="motion-layer">
-    <g class="grid" opacity="0.68" data-grid-field="continuous"
-      clip-path="url(#grid-below-divider)">
-      <animate attributeName="opacity" values="0.58;0.76;0.66;0.74;0.58"
-        keyTimes="0;0.25;0.5;0.75;1" dur="${DURATION_SECONDS}s"
-        calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
-        repeatCount="indefinite" />
-${horizontal}
-${vertical}
-    </g>
-  </g>
-
-`;
-}
-
-function staticGridMarkup() {
-  const paths = gridPathsAt(0);
-  return `    <g class="grid" opacity="0.58" data-grid-field="static"
-      clip-path="url(#grid-below-divider)">
-${[...paths.horizontal, ...paths.vertical]
-  .map((d) => `      <path d="${d}" />`)
-  .join("\n")}
-    </g>`;
-}
-
-async function updateSvgSource(svgPath) {
-  let svg = await fs.readFile(svgPath, "utf8");
-  const clipMarkup = `    <clipPath id="grid-below-divider">
-      <rect x="${-OVERSCAN_X}" y="${DIVIDER_Y}" width="${WIDTH + OVERSCAN_X * 2}" height="${HEIGHT - DIVIDER_Y + OVERSCAN_Y}" />
-    </clipPath>`;
-  svg = svg.replace(
-    /\s*<clipPath id="grid-below-divider">[\s\S]*?<\/clipPath>/,
-    "",
-  );
-  svg = svg.replace("  </defs>", `${clipMarkup}\n  </defs>`);
-  svg = svg.replace(
-    /\n\s*<line class="divider" x1="28" y1="55" x2="1172" y2="55" \/>/g,
-    "",
-  );
-  svg = svg.replace(
-    /\n\s*<!-- Fixed foreground boundary between the profile label and warp field\. -->/g,
-    "",
-  );
-  const originalMotionStart = svg.indexOf("  <!-- The full field evolves");
-  const generatedMotionStart = svg.indexOf(
-    "  <!-- Shared periodic deformation field",
-  );
-  const motionStart =
-    originalMotionStart >= 0 ? originalMotionStart : generatedMotionStart;
-  const motionEnd = svg.indexOf("  <!-- One-time radial burst", motionStart);
-  if (motionStart < 0 || motionEnd < 0) {
-    throw new Error(`Could not find motion grid markers in ${svgPath}`);
-  }
-  svg =
-    svg.slice(0, motionStart) +
-    motionGridMarkup() +
-    svg.slice(motionEnd);
-
-  const staticLayerStart = svg.indexOf('  <g class="static-layer">');
-  const staticGridStart = svg.indexOf('    <g class="grid"', staticLayerStart);
-  const staticGridEnd = svg.indexOf("    </g>", staticGridStart);
-  if (staticGridStart < 0 || staticGridEnd < 0) {
-    throw new Error(`Could not find reduced-motion grid in ${svgPath}`);
-  }
-  svg =
-    svg.slice(0, staticGridStart) +
-    staticGridMarkup() +
-    svg.slice(staticGridEnd + "    </g>".length);
-
-  svg = svg.replace(
-    "\n</svg>",
-    `\n  <!-- Fixed foreground boundary between the profile label and warp field. -->\n  <line class="divider" x1="28" y1="${DIVIDER_Y}" x2="1172" y2="${DIVIDER_Y}" />\n</svg>`,
-  );
-
-  await fs.writeFile(svgPath, svg);
-}
-
 async function main() {
   const command = process.argv[2];
   if (command === "validate") {
     console.log(JSON.stringify(validateTimeline(), null, 2));
     return;
   }
-  if (command === "write-sources") {
-    const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
-    const repositoryRoot = path.resolve(scriptDirectory, "..");
-    await updateSvgSource(
-      path.join(repositoryRoot, "assets/profile-header-dark.svg"),
-    );
-    await updateSvgSource(
-      path.join(repositoryRoot, "assets/profile-header-light.svg"),
-    );
-    console.log("Updated dark/light SVG grids from the shared deformation field.");
-    return;
-  }
-  throw new Error(
-    "Usage: node scripts/profile-header-grid-field.mjs <validate|write-sources>",
-  );
+  throw new Error("Usage: node scripts/profile-header-grid-field.mjs validate");
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
