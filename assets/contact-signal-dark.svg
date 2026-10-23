@@ -4,15 +4,15 @@
 
   <style>
     text {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
-    .frame { fill: #07111f; stroke: #18374a; }
-    .label { fill: #f4f7f8; }
-    .meta { fill: #91a9b8; }
-    .divider { stroke: #102a3a; }
+    .frame { fill: #161b22; stroke: #30363d; }
+    .label { fill: #e6edf3; }
+    .meta { fill: #8b949e; }
+    .divider { stroke: #30363d; }
     .track {
       fill: none;
-      stroke: #18374a;
+      stroke: #30363d;
       stroke-width: 1.4;
     }
     .signal-left,
@@ -28,7 +28,7 @@
 
   </style>
 
-  <rect class="frame" x="1" y="1" width="1198" height="102" rx="5" />
+  <rect class="frame" x="1" y="1" width="1198" height="102" rx="6" />
   <line class="divider" x1="28" y1="18" x2="1172" y2="18" />
   <line class="divider" x1="28" y1="86" x2="1172" y2="86" />
 
