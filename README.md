@@ -1,10 +1,6 @@
 <p align="center">
-  <img src="./assets/profile-header-field.svg" width="100%" alt="">
+  <img src="./assets/profile-header-field.svg" width="100%" alt="PING SCIENTIST — Physics, Scientific Computing, and Web">
 </p>
-
-<h1 align="center">PING SCIENTIST</h1>
-
-<p align="center"><sub>NTHU PHYSICS / MATLAB / FULL-STACK SYSTEMS</sub></p>
 
 <p align="center">
   Physics student building simulations, interfaces, and open knowledge systems.

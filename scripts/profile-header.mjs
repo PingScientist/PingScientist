@@ -12,6 +12,12 @@ import {
   validateTimeline,
 } from "./profile-header-grid-field.mjs";
 import { MOTION_PARTICLES, STATIC_PARTICLES } from "./header-particles.mjs";
+import {
+  TYPE_DEFS,
+  TYPE_LAYER,
+  TYPE_MICRO,
+  TYPE_STATIC,
+} from "./header-type.mjs";
 
 // ---------------------------------------------------------------------------
 // One header, every theme.
@@ -34,16 +40,77 @@ const KEYFRAME_COUNT = 21; // integer seconds 0..20; t=20 is t=0 again
 
 const VIEW = {
   y: DIVIDER_Y, // the field is flat above this line, so it is a clean top edge
-  height: 230, // was 320: the header no longer has to hold the title
+  height: 235, // was 320; the PROFILE / 00 label and its divider are gone
 };
 
 const PALETTE = {
+  // The field carries no theme. It is a mid grey at low opacity and lets the
+  // page tint it, so it is correct on every GitHub canvas at once.
   grid: "#8b949e",
   gridOpacity: ["0.17", "0.24", "0.20", "0.23", "0.17"],
   cyan: "#0d9488", // 5.1:1 on #0d1117, 3.7:1 on #ffffff
   gold: "#a97e1f", // 5.1:1 on #0d1117, 3.7:1 on #ffffff
   neutral: "#7d8590", // 5.1:1 on #0d1117, 3.7:1 on #ffffff
 };
+
+// Type cannot work that way. The subtitle is 16px, so it needs 4.5:1, and no
+// single colour reaches 4.5:1 against both #0d1117 and #ffffff - the best any
+// one colour manages against both is 4.35:1. So the type switches on the
+// viewer's colour scheme, which works inside an SVG loaded as an <img>.
+//
+// The cost is the familiar one: prefers-color-scheme follows the OS, not the
+// GitHub theme, so a viewer who runs a light OS with GitHub set to dark gets
+// dark type on a dark page. Setting NEUTRAL_TYPE to true trades the bright
+// title for one mid grey that is never wrong on any canvas, at 4.35:1 - and
+// never as crisp.
+const NEUTRAL_TYPE = false;
+
+const TYPE = {
+  dark: {
+    title: "#e6edf3",
+    subtitle: "#adbac7",
+    quiet: "#8b949e",
+    cyan: "#42d6c5",
+    gold: "#c7a85a",
+  },
+  light: {
+    title: "#1f2328",
+    subtitle: "#424a53",
+    quiet: "#636c76",
+    cyan: "#0f766e",
+    gold: "#8a6a20",
+  },
+  neutral: {
+    title: "#6e7781",
+    subtitle: "#6e7781",
+    quiet: "#6e7781",
+    cyan: "#0d9488",
+    gold: "#a97e1f",
+  },
+};
+
+function typeRules(theme) {
+  return `    .title-text { fill: ${theme.title}; }
+    .subtitle { fill: ${theme.subtitle}; }
+    .quiet { fill: ${theme.quiet}; }
+    .cyan-fill { fill: ${theme.cyan}; }
+    .gold-fill { fill: ${theme.gold}; }
+    .gold-stroke { stroke: ${theme.gold}; }`;
+}
+
+function typeStylesheet() {
+  if (NEUTRAL_TYPE) {
+    return typeRules(TYPE.neutral);
+  }
+  return `${typeRules(TYPE.dark)}
+
+    @media (prefers-color-scheme: light) {
+${typeRules(TYPE.light)
+  .split("\n")
+  .map((line) => `  ${line}`)
+  .join("\n")}
+    }`;
+}
 
 // ---------------------------------------------------------------------------
 // Particle orbits
@@ -262,12 +329,13 @@ ${[...paths.horizontal, ...paths.vertical]
 function headerSvg() {
   const { y, height } = VIEW;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${y} ${WIDTH} ${height}" role="img" aria-labelledby="title desc">
-  <title id="title">Deforming coordinate field</title>
-  <desc id="desc">A coordinate grid warps continuously under a smooth periodic field while particles drift across it.</desc>
+  <title id="title">PING SCIENTIST</title>
+  <desc id="desc">The title types in over a coordinate grid that warps continuously under a smooth periodic field, with particles drifting across it on closed orbits.</desc>
 
   <defs>
     <!-- The field has no frame, so it is faded out at all four edges instead
-         of being cut. Mask luminance: white keeps, black hides. -->
+         of being cut. Mask luminance: white keeps, black hides. The type sits
+         outside these masks and stays at full strength. -->
     <linearGradient id="fade-x" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#000" />
       <stop offset="0.06" stop-color="#fff" />
@@ -277,7 +345,7 @@ function headerSvg() {
     <linearGradient id="fade-y" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#000" />
       <stop offset="0.09" stop-color="#fff" />
-      <stop offset="0.88" stop-color="#fff" />
+      <stop offset="0.9" stop-color="#fff" />
       <stop offset="1" stop-color="#000" />
     </linearGradient>
     <mask id="edge-x" maskUnits="userSpaceOnUse" x="0" y="${y}" width="${WIDTH}" height="${height}">
@@ -286,9 +354,13 @@ function headerSvg() {
     <mask id="edge-y" maskUnits="userSpaceOnUse" x="0" y="${y}" width="${WIDTH}" height="${height}">
       <rect x="0" y="${y}" width="${WIDTH}" height="${height}" fill="url(#fade-y)" />
     </mask>
+${TYPE_DEFS}
   </defs>
 
   <style>
+    text {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
     .grid {
       fill: none;
       stroke: ${PALETTE.grid};
@@ -300,6 +372,8 @@ function headerSvg() {
     .particle-white { fill: ${PALETTE.neutral}; }
     .motion-layer { display: inline; }
     .static-layer { display: none; }
+
+${typeStylesheet()}
 
     @media (prefers-reduced-motion: reduce) {
       .motion-layer { display: none; }
@@ -316,22 +390,30 @@ function headerSvg() {
 ${motionGrid()}
     </g>
 
-    <!-- Closed particle paths, each on its own period. Nothing here is
-         synchronised, which is exactly why it cannot be baked to a GIF. -->
-    <g class="motion-layer">
+    <!-- Closed particle orbits, each on its own period, masked by the glyph
+         shapes so they pass behind the title rather than over it. -->
+    <g class="motion-layer" mask="url(#text-collision-mask)">
 ${orbitParticlePaths(MOTION_PARTICLES)}
     </g>
 
-    <!-- Still composition for people who ask for reduced motion. -->
+    <!-- Still field for people who ask for reduced motion. -->
     <g class="static-layer">
 ${staticGrid()}
-      <g opacity="0.88">
+      <g mask="url(#text-collision-mask)" opacity="0.88">
 ${STATIC_PARTICLES}
       </g>
     </g>
 
    </g>
   </g>
+
+${TYPE_LAYER}
+
+  <g class="static-layer">
+${TYPE_STATIC}
+  </g>
+
+${TYPE_MICRO}
 </svg>
 `;
 }
