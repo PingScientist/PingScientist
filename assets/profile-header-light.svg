@@ -41,18 +41,19 @@
     text {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .surface { fill: #edf2f3; }
-    .title-text, .particle-white { fill: #152b37; }
-    .subtitle { fill: #405d6a; }
-    .micro { fill: #597480; }
-    .quiet { fill: #6d858f; }
-    .divider { stroke: #b9ccd3; }
+    .surface { fill: #ffffff; }
+    .title-text { fill: #1f2328; }
+    .particle-white { fill: #6e7781; }
+    .subtitle { fill: #424a53; }
+    .micro { fill: #636c76; }
+    .quiet { fill: #636c76; }
+    .divider { stroke: #d0d7de; }
     .grid {
       fill: none;
-      stroke: #9bb8c1;
+      stroke: #d0d7de;
       stroke-width: 1.1;
     }
-    .cyan-fill, .particle-cyan { fill: #087f79; }
+    .cyan-fill, .particle-cyan { fill: #0f766e; }
     .gold-fill, .particle-gold { fill: #8a6a20; }
     .gold-stroke { stroke: #8a6a20; }
     .motion-layer { display: inline; }
